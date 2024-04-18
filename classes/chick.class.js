@@ -13,6 +13,6 @@ class Chick extends Chicken {
         this.loadImages(this.IMAGES_WALKING);
         this.x = 500 + Math.random() * 2000;
         this.speed = 0.1  + Math.random() * 0.25;
-        this.animate();
+        // this.animate();
     }
 }
