@@ -1,11 +1,57 @@
 body {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    justify-content: center; 
+    align-items: center; 
+    background-image: url(img/9_intro_outro_screens/background/desert-5112222_1280.png);
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    margin: 0;
 }
+
+.canvas-container {
+    position: relative;
+    width: 720px;
+    height: 480px;
+    aspect-ratio: auto 720/480;
+}
+
+#start_screen {
+    width: 720px;
+    height: 480px; 
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+#start_button {
+    width: 120px;
+    height: 120px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -40%);
+    z-index: 2; 
+    /* filter: brightness(0) saturate(100%) invert(38%) sepia(7%) saturate(22%) hue-rotate(7deg) brightness(91%) contrast(89%); */
+    filter: opacity(0.3);
+  }
+
+#start_button:hover {
+    cursor: pointer;
+    
+}
+
+
 
 canvas {
     background-color: black;
     display: block;
-}
+    position: absolute;
+    /* top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); */
+ }
 

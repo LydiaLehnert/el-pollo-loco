@@ -25,13 +25,19 @@ class DrawableObject {
     }
 
     drawFrame(ctx) {
-        if (this instanceof Character || this instanceof Chicken) {
+        if (this instanceof Character || this instanceof Chicken || this instanceof Coin || this instanceof Bottle) {
             ctx.beginPath();
             ctx.lineWidth = '1';
             ctx.strokeStyle = 'blue';
             ctx.rect(this.x, this.y, this.width, this.height);
             ctx.stroke();
         }
+    }
 
+    isColliding(drawableObject) {
+        return this.x + this.width > drawableObject.x &&
+            this.y + this.height > drawableObject.y &&
+            this.x < drawableObject.x + drawableObject.width &&
+            this.y < drawableObject.y + drawableObject.height;
     }
 }
