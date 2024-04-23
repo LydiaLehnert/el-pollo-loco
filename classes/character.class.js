@@ -110,7 +110,11 @@ class Character extends MovableObject {
         }, 200);
     }
 
-    // jump() {
+    collectBottle() {
+        world.collectedBottles += 20;
+    }
 
-    // }
+    collectCoin() {
+        world.collectedCoins += 20;
+    }
 }

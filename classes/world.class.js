@@ -8,6 +8,7 @@ class World {
     statusBarEnergy = new StatusBarEnergy();
     statusBarCoins = new StatusBarCoins();
     statusBarBottles = new StatusBarBottles();
+    statusBarEndboss = new StatusBarEndboss();
     throwableObjects = [];
     collectedCoins = 0;
     collectedBottles = 0;
@@ -43,9 +44,9 @@ class World {
         });
     }
 
+
     checkThrowableObjects() {
         if (this.keyboard.D && this.collectedBottles > 0) {
-            console.log('Taste D gedrückt', this.keyboard.D);
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
             this.throwableObjects.push(bottle);
             this.collectedBottles -= 20;
@@ -56,29 +57,21 @@ class World {
     checkCollectionOfBottles() {
         this.level.bottles.forEach((bottle, indexOfBottles) => {
             if(this.character.isColliding(bottle)) {
-                this.collectBottle();
+                this.character.collectBottle();
                 this.level.bottles.splice(indexOfBottles, 1);
                 this.statusBarBottles.setPercentage(this.collectedBottles);
             } 
         });
     }
 
-    collectBottle() {
-        this.collectedBottles += 20;
-    }
-
     checkCollectionOfCoins() {
         this.level.coins.forEach((coin, indexOfCoins) => {
             if (this.character.isColliding(coin)) {  
-                this.collectCoin();
+                this.character.collectCoin();
                 this.level.coins.splice(indexOfCoins, 1);
                 this.statusBarCoins.setPercentage(this.collectedCoins);
             }
         });
-    }
-    
-    collectCoin() {
-        this.collectedCoins += 20;
     }
 
     draw() {
@@ -94,6 +87,7 @@ class World {
         this.addToMap(this.statusBarEnergy);
         this.addToMap(this.statusBarCoins);
         this.addToMap(this.statusBarBottles);
+        this.addToMap(this.statusBarEndboss);
         this.ctx.translate(this.camera_x, 0);
 
         this.addObjectsToMap(this.throwableObjects);
