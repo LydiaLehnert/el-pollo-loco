@@ -44,9 +44,12 @@ class World {
     }
 
     checkThrowableObjects() {
-        if (this.keyboard.D) {
+        if (this.keyboard.D && this.collectedBottles > 0) {
+            console.log('Taste D gedrückt', this.keyboard.D);
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
             this.throwableObjects.push(bottle);
+            this.collectedBottles -= 20;
+            this.statusBarBottles.setPercentage(this.collectedBottles);
         }
     }
 
