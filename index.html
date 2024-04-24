@@ -15,7 +15,7 @@
     <script src="classes/status-bar.class.js"></script>
     <script src="classes/status-bar-bottles.class.js"></script>
     <script src="classes/status-bar-coins.class.js"></script>
-    <script src="classes/status-bar-endboss.class.js"></script> 
+    <script src="classes/status-bar-endboss.class.js"></script>
     <script src="classes/status-bar-energy.class.js"></script>
     <script src="classes/world.class.js"></script>
     <script src="classes/background-object.class.js"></script>
@@ -32,12 +32,16 @@
 
 <body onload="init()">
     <h1>El pollo loco</h1>
-    <div class = "canvas-container">
+    <div class="canvas-container">
         <!-- <img id="start_screen" src="img/9_intro_outro_screens/start/startscreen_1.png">
         <img id = "start_button" onclick = "startGame()" src="img/9_intro_outro_screens/start/play_arrow4.svg"> -->
-        <canvas id="canvas" width="720" height="480">
-        </canvas>
+        <div id="fullscreen_container">
+            <canvas id="canvas" width="720" height="480">
+            </canvas>
+               <img onclick = "fullscreen()" id="fullscreen_icon" class="fullscreen-icon" src="img/10_fullscreen/fullscreen.svg">
+        </div>
     </div>
+ 
 
 </body>
 

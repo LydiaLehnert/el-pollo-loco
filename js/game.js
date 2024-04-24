@@ -34,7 +34,7 @@ window.addEventListener("keydown", (event) => {
     if (event.keyCode == 32) {
         keyboard.SPACE = true;
     }
-    
+
     if (event.keyCode == 68) {
         keyboard.D = true;
     }
@@ -66,3 +66,28 @@ window.addEventListener("keyup", (event) => {
         keyboard.D = false;
     }
 });
+
+function fullscreen() {
+    let fullscreen = document.getElementById('fullscreen_container');
+    enterFullscreen(fullscreen);
+}
+
+function enterFullscreen(fullscreen) {
+    if (fullscreen.requestFullscreen) {
+        fullscreen.requestFullscreen();
+    } else if (fullscreen.msRequestFullscreen) {
+        fullscreen.msRequestFullscreen();
+    } else if (fullscreen.webkitRequestFullscreen) {
+        fullscreen.webkitRequestFullscreen();
+    }
+}
+
+function exitFullscreen() {
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+    }
+}
+
+
