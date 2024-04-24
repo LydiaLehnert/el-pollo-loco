@@ -10,8 +10,8 @@ const level1 = new Level(
         // new Chick(),
         // new Chick(),
         // new Chick(),
-        new Endboss()
     ],
+    new Endboss(),
     [
         new Cloud(),
         new Cloud(),
@@ -25,6 +25,11 @@ const level1 = new Level(
         new Cloud()
     ],
     [
+        new Bottle(),
+        new Bottle(),
+        new Bottle(),
+        new Bottle(),
+        new Bottle(),
         new Bottle(),
         new Bottle(),
         new Bottle(),

@@ -13,7 +13,7 @@ class Character extends MovableObject {
         'img/2_character_pepe/1_idle/idle/I-7.png',
         'img/2_character_pepe/1_idle/idle/I-8.png',
         'img/2_character_pepe/1_idle/idle/I-9.png',
-        'img/2_character_pepe/1_idle/idle/I-10.png',
+        'img/2_character_pepe/1_idle/idle/I-10.png'
     ];
     IMAGES_WALKING = [
         'img/2_character_pepe/2_walk/W-21.png',
@@ -89,9 +89,8 @@ class Character extends MovableObject {
         //TODO: structure more clearly
         setInterval(() => {
             if (this.isDead()) {
-            this.playAnimation(this.IMAGES_DEAD);
-            } else
-            if (this.isHurt()) {
+                this.playAnimation(this.IMAGES_DEAD);
+            } else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
             } else if (
                 !keyboard.RIGHT &&
@@ -111,7 +110,7 @@ class Character extends MovableObject {
     }
 
     collectBottle() {
-        world.collectedBottles += 20;
+        world.collectedBottles += 10;
     }
 
     collectCoin() {

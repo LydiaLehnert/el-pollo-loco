@@ -30,6 +30,7 @@ class World {
         setInterval(() => {
             this.checkCollisions();
             this.checkThrowableObjects();
+            this.checkBottleHitsEndboss();
             this.checkCollectionOfCoins();
             this.checkCollectionOfBottles();
         }, 200);
@@ -38,20 +39,31 @@ class World {
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
-                this.character.hit();
+                this.character.hit(3);
                 this.statusBarEnergy.setPercentage(this.character.energy);
             }
         });
     }
 
-
     checkThrowableObjects() {
-        if (this.keyboard.D && this.collectedBottles > 0) {
+        if (this.keyboard.D 
+            // && this.collectedBottles > 0
+        ) {
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
             this.throwableObjects.push(bottle);
             this.collectedBottles -= 20;
             this.statusBarBottles.setPercentage(this.collectedBottles);
         }
+    }
+
+    checkBottleHitsEndboss() {
+        this.throwableObjects.forEach((throwableObject, indexOfThrowableObjects) => {
+            if(this.level.endboss.isColliding(throwableObject)) {
+                this.level.endboss.hit(20);
+                this.throwableObjects.splice(indexOfThrowableObjects, 1);
+                this.statusBarEndboss.setPercentage(this.level.endboss.energy);
+            } 
+        });
     }
 
     checkCollectionOfBottles() {
@@ -94,6 +106,8 @@ class World {
         this.addObjectsToMap(this.level.bottles);
         this.addObjectsToMap(this.level.coins);
         this.addObjectsToMap(this.level.enemies);
+        this.addToMap(this.level.endboss);
+        
 
         this.ctx.translate(-this.camera_x, 0);
 

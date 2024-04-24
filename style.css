@@ -14,7 +14,7 @@ body {
     position: relative;
     width: 720px;
     height: 480px;
-    aspect-ratio: auto 720/480;
+    /* aspect-ratio: auto 720/480; */
 }
 
 #start_screen {
@@ -41,14 +41,14 @@ body {
 
 #start_button:hover {
     cursor: pointer;
-    
 }
-
 
 canvas {
     background-color: black;
     display: block;
     position: absolute;
+    width: 100%;
+    max-height: 100%; 
     /* top: 50%;
     left: 50%;
     transform: translate(-50%, -50%); */
@@ -67,6 +67,7 @@ canvas {
 @media only screen and (max-width: 720px) {
     canvas {
         width: 100%; 
+        max-width: 500px;
     }
     h1 {
         display: none;
@@ -79,3 +80,5 @@ canvas {
         height: 100vh; 
     }
 }
+
+
