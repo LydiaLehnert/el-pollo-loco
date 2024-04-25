@@ -1,8 +1,11 @@
 class Character extends MovableObject {
-
     y = 180;
     width = 150;
     height = 250;
+    speed = 10;
+    world;
+    walking_sound = new Audio('audio/running.mp3');
+    
     IMAGES_IDLE = [
         'img/2_character_pepe/1_idle/idle/I-1.png',
         'img/2_character_pepe/1_idle/idle/I-2.png',
@@ -48,10 +51,6 @@ class Character extends MovableObject {
         'img/2_character_pepe/5_dead/D-56.png',
         'img/2_character_pepe/5_dead/D-57.png'
     ];
-    speed = 10;
-    world;
-    walking_sound = new Audio('audio/running.mp3');
-
 
     constructor() {
         super().loadImage('img/2_character_pepe/2_walk/W-21.png');
@@ -71,6 +70,7 @@ class Character extends MovableObject {
                 this.moveRight();
                 this.otherDirection = false;
                 this.walking_sound.play();
+                console.log ('character, x-Koordinate', this.x)
             }
             if (this.world.keyboard.LEFT && this.x > 0) {
                 this.moveLeft();

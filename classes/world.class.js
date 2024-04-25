@@ -30,23 +30,27 @@ class World {
         setInterval(() => {
             this.checkCollisions();
             this.checkThrowableObjects();
-            this.checkBottleHitsEndboss();
+            this.checkBottleHitsEnemies();
             this.checkCollectionOfCoins();
             this.checkCollectionOfBottles();
         }, 200);
     }
 
     checkCollisions() {
-        this.level.enemies.forEach((enemy) => {
+        if (this.character.isColliding(this.level.endboss)) {
+            this.character.hit(6);
+            this.statusBarEnergy.setPercentage(this.character.energy);
+        } else if (this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
                 this.character.hit(3);
                 this.statusBarEnergy.setPercentage(this.character.energy);
             }
-        });
+        })
+        );
     }
 
     checkThrowableObjects() {
-        if (this.keyboard.D 
+        if (this.keyboard.D
             // && this.collectedBottles > 0
         ) {
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
@@ -56,29 +60,36 @@ class World {
         }
     }
 
-    checkBottleHitsEndboss() {
+    checkBottleHitsEnemies() {
         this.throwableObjects.forEach((throwableObject, indexOfThrowableObjects) => {
-            if(this.level.endboss.isColliding(throwableObject)) {
+            if (this.level.endboss.isColliding(throwableObject)) {
                 this.level.endboss.hit(20);
                 this.throwableObjects.splice(indexOfThrowableObjects, 1);
                 this.statusBarEndboss.setPercentage(this.level.endboss.energy);
-            } 
+            }
+            //TODO: Fix Problem
+            // else if (this.level.enemies.forEach((enemy) => {                
+            //     if (enemy.isColliding(throwableObject)) {
+            //         enemy.hit(100);
+            //     }
+            // })
+            // );
         });
     }
 
     checkCollectionOfBottles() {
         this.level.bottles.forEach((bottle, indexOfBottles) => {
-            if(this.character.isColliding(bottle)) {
+            if (this.character.isColliding(bottle)) {
                 this.character.collectBottle();
                 this.level.bottles.splice(indexOfBottles, 1);
                 this.statusBarBottles.setPercentage(this.collectedBottles);
-            } 
+            }
         });
     }
 
     checkCollectionOfCoins() {
         this.level.coins.forEach((coin, indexOfCoins) => {
-            if (this.character.isColliding(coin)) {  
+            if (this.character.isColliding(coin)) {
                 this.character.collectCoin();
                 this.level.coins.splice(indexOfCoins, 1);
                 this.statusBarCoins.setPercentage(this.collectedCoins);
@@ -107,7 +118,7 @@ class World {
         this.addObjectsToMap(this.level.coins);
         this.addObjectsToMap(this.level.enemies);
         this.addToMap(this.level.endboss);
-        
+
 
         this.ctx.translate(-this.camera_x, 0);
 

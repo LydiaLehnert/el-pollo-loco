@@ -2,6 +2,8 @@ class Endboss extends MovableObject {
     y = 55;
     width = 250;
     height = 400;
+    speed = 5;
+    hadfirstContact = false;
 
     IMAGES_ALERT = [
         'img/4_enemie_boss_chicken/2_alert/G5.png',
@@ -19,7 +21,7 @@ class Endboss extends MovableObject {
         'img/4_enemie_boss_chicken/1_walk/G2.png',
         'img/4_enemie_boss_chicken/1_walk/G3.png',
         'img/4_enemie_boss_chicken/1_walk/G4.png'
-    ]
+    ];
 
     IMAGES_ATTACK = [
         'img/4_enemie_boss_chicken/3_attack/G13.png',
@@ -30,7 +32,7 @@ class Endboss extends MovableObject {
         'img/4_enemie_boss_chicken/3_attack/G18.png',
         'img/4_enemie_boss_chicken/3_attack/G19.png',
         'img/4_enemie_boss_chicken/3_attack/G20.png'
-    ]
+    ];
 
     IMAGES_HURT = [
         'img/4_enemie_boss_chicken/4_hurt/G21.png',
@@ -44,29 +46,53 @@ class Endboss extends MovableObject {
         'img/4_enemie_boss_chicken/5_dead/G26.png'
     ];
 
+
     constructor() {
         super().loadImage(this.IMAGES_ALERT[0]);
         this.loadImages(this.IMAGES_ALERT);
+        this.loadImages(this.IMAGES_WALKING);
+        this.loadImages(this.IMAGES_ATTACK);
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
-        this.x = 2700;
+        this.x = 2500;
         this.animate();
     }
 
-    animate() {
+        animate() {
+        let i = 0;     
+                                   
+        setInterval(() => {
+         
+            // this.playAnimation(this.IMAGES_ALERT);
+         
+            if (world.character.x > 2100 && !this.hadfirstContact) { 
+                this.hadfirstContact = true;
+               
+                if (i < 8) {                           
+                    this.playAnimation(this.IMAGES_ALERT);
+                } else {
+                    this.playAnimation(this.IMAGES_WALKING);
+                    this.moveLeft();
+                }
+                i++;            
+            }
+        }, 300);
+
+
         setInterval(() => {
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
             } else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
-            // } else if (this.isColliding(world.character) && world.character.isHurt) {
-            //     this.playAnimation(this.IMAGES_ATTACK);
+            } else if (this.isColliding(world.character) && world.character.isHurt()) {
+                this.playAnimation(this.IMAGES_ATTACK);
             }
-
-
-            else {
-                this.playAnimation(this.IMAGES_ALERT);
-            }
-        }, 200);
+        }, 150);
     }
+
+
+
+
+
+
 }
