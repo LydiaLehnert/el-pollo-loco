@@ -112,9 +112,9 @@ class Character extends MovableObject {
 
     collectBottle() {
         world.collectedBottles += 10;
-    }
+    };
 
     collectCoin() {
         world.collectedCoins += 20;
     }
-}
+};

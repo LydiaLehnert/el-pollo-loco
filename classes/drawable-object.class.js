@@ -10,7 +10,7 @@ class DrawableObject {
     loadImage(path) {
         this.img = new Image();
         this.img.src = path;
-    }
+    };
 
     loadImages(array) {
         array.forEach((path) => {

@@ -33,7 +33,7 @@ class World {
             this.checkBottleHitsEnemies();
             this.checkCollectionOfCoins();
             this.checkCollectionOfBottles();
-        }, 200);
+        }, 20);
     }
 
     checkCollisions() {
@@ -60,23 +60,7 @@ class World {
             this.statusBarBottles.setPercentage(this.collectedBottles);
             this.keyboard.D = false;
         }
-    }
-
-    checkBottleHitsEnemies() {
-        this.throwableObjects.forEach((throwableObject, indexOfThrowableObjects) => {
-            if (this.level.endboss.isColliding(throwableObject)) {
-                this.level.endboss.hit(20);
-                this.throwableObjects.splice(indexOfThrowableObjects, 1);
-                this.statusBarEndboss.setPercentage(this.level.endboss.energy);
-            } else if (this.level.enemies.forEach((enemy) => {                
-                if (enemy.isColliding(throwableObject)) {
-                    enemy.hit(100);
-                }
-            })
-            );
-        });
-    }
-
+    }d
 
     checkBottleHitsEnemies() {
         this.throwableObjects.forEach((throwableObject, indxOfThrowableObjects) => {
