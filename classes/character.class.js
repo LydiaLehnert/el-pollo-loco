@@ -57,8 +57,8 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_IDLE);
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_JUMPING);
-        this.loadImages(this.IMAGES_HURT);
-        this.loadImages(this.IMAGES_DEAD);
+        // this.loadImages(this.IMAGES_HURT);
+        // this.loadImages(this.IMAGES_DEAD);
         this.applyGravity();
         this.animate();
     }
@@ -70,7 +70,7 @@ class Character extends MovableObject {
                 this.moveRight();
                 this.otherDirection = false;
                 this.walking_sound.play();
-                console.log ('character, x-Koordinate', this.x)
+                // console.log ('character, x-Koordinate', this.x);
             }
             if (this.world.keyboard.LEFT && this.x > 0) {
                 this.moveLeft();
@@ -88,11 +88,12 @@ class Character extends MovableObject {
 
         //TODO: structure more clearly
         setInterval(() => {
-            if (this.isDead()) {
-                this.playAnimation(this.IMAGES_DEAD);
-            } else if (this.isHurt()) {
-                this.playAnimation(this.IMAGES_HURT);
-            } else if (
+            // if (this.isDead()) {                         // commented out for testing
+            //     this.playAnimation(this.IMAGES_DEAD);
+            // } else if (this.isHurt()) {
+            //     this.playAnimation(this.IMAGES_HURT);
+            // } else 
+            if (
                 !keyboard.RIGHT &&
                 !keyboard.LEFT &&
                 !keyboard.UP &&

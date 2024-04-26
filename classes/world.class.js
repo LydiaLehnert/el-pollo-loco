@@ -1,6 +1,6 @@
 class World {
     character = new Character();
-    level = level1;
+    level = createLevel1();
     canvas;
     ctx;
     keyboard;
@@ -40,13 +40,14 @@ class World {
         if (this.character.isColliding(this.level.endboss)) {
             this.character.hit(6);
             this.statusBarEnergy.setPercentage(this.character.energy);
-        } else if (this.level.enemies.forEach((enemy) => {
+        }
+        
+        this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
                 this.character.hit(3);
                 this.statusBarEnergy.setPercentage(this.character.energy);
             }
-        })
-        );
+        });
     }
 
     checkThrowableObjects() {
@@ -57,6 +58,7 @@ class World {
             this.throwableObjects.push(bottle);
             this.collectedBottles -= 20;
             this.statusBarBottles.setPercentage(this.collectedBottles);
+            this.keyboard.D = false;
         }
     }
 
@@ -66,17 +68,34 @@ class World {
                 this.level.endboss.hit(20);
                 this.throwableObjects.splice(indexOfThrowableObjects, 1);
                 this.statusBarEndboss.setPercentage(this.level.endboss.energy);
-            }
-            //TODO: Fix Problem
-            // else if (this.level.enemies.forEach((enemy) => {                
-            //     if (enemy.isColliding(throwableObject)) {
-            //         enemy.hit(100);
-            //     }
-            // })
-            // );
+            } else if (this.level.enemies.forEach((enemy) => {                
+                if (enemy.isColliding(throwableObject)) {
+                    enemy.hit(100);
+                }
+            })
+            );
         });
     }
 
+
+    checkBottleHitsEnemies() {
+        this.throwableObjects.forEach((throwableObject, indxOfThrowableObjects) => {
+            if (this.level.endboss.isColliding(throwableObject)) {
+                throwableObject.discard();
+                this.level.endboss.hit(20);
+                this.throwableObjects.splice(indexOfThrowableObjects, 1);
+                this.statusBarEndboss.setPercentage(this.level.endboss.energy);
+            } else {
+                this.level.enemies.forEach((enemy) => {
+                    if (enemy.isColliding(throwableObject)) {
+                        throwableObject.discard();
+                        enemy.hit(100);
+                    }
+                });
+            }
+        });
+    }
+    
     checkCollectionOfBottles() {
         this.level.bottles.forEach((bottle, indexOfBottles) => {
             if (this.character.isColliding(bottle)) {
