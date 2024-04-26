@@ -1,5 +1,4 @@
 class StatusBarEnergy extends StatusBar {
-    x = 40;
     y = 95; 
     percentage = 100;
     IMAGES = [

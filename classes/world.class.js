@@ -41,7 +41,7 @@ class World {
             this.character.hit(6);
             this.statusBarEnergy.setPercentage(this.character.energy);
         }
-        
+
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
                 this.character.hit(3);
@@ -60,10 +60,11 @@ class World {
             this.statusBarBottles.setPercentage(this.collectedBottles);
             this.keyboard.D = false;
         }
-    }d
+    }
+
 
     checkBottleHitsEnemies() {
-        this.throwableObjects.forEach((throwableObject, indxOfThrowableObjects) => {
+        this.throwableObjects.forEach((throwableObject, indexOfThrowableObjects) => {
             if (this.level.endboss.isColliding(throwableObject)) {
                 throwableObject.discard();
                 this.level.endboss.hit(20);
@@ -79,7 +80,7 @@ class World {
             }
         });
     }
-    
+
     checkCollectionOfBottles() {
         this.level.bottles.forEach((bottle, indexOfBottles) => {
             if (this.character.isColliding(bottle)) {
@@ -100,21 +101,14 @@ class World {
         });
     }
 
+  
     draw() {
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
-        this.ctx.translate(this.camera_x, 0);
+        this.clearAndSetupCanvas();
         this.addObjectsToMap(this.level.backgroundObjects);
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.clouds);
 
-        this.ctx.translate(-this.camera_x, 0);
-        // ------ Space for fixed objects ------ 
-        this.addToMap(this.statusBarEnergy);
-        this.addToMap(this.statusBarCoins);
-        this.addToMap(this.statusBarBottles);
-        this.addToMap(this.statusBarEndboss);
-        this.ctx.translate(this.camera_x, 0);
+        this.drawFixedElements();
 
         this.addObjectsToMap(this.throwableObjects);
         this.addObjectsToMap(this.level.bottles);
@@ -122,13 +116,35 @@ class World {
         this.addObjectsToMap(this.level.enemies);
         this.addToMap(this.level.endboss);
 
-
-        this.ctx.translate(-this.camera_x, 0);
+        this.resetCanvasTranslation();
 
         let self = this;
         requestAnimationFrame(function () {
             self.draw();
         });
+    }
+
+    clearAndSetupCanvas() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.translate(this.camera_x, 0);
+    }
+
+    resetCanvasTranslation() {
+        this.ctx.translate(-this.camera_x, 0);
+    }
+
+    
+    drawFixedElements() {
+        this.ctx.translate(-this.camera_x, 0);
+
+        this.addToMap(this.statusBarEnergy);
+        this.addToMap(this.statusBarCoins);
+        this.addToMap(this.statusBarBottles);
+        if (this.level.endboss.hadFirstContact) {
+            this.addToMap(this.statusBarEndboss);
+        }
+
+        this.ctx.translate(this.camera_x, 0);
     }
 
     addObjectsToMap(objects) {

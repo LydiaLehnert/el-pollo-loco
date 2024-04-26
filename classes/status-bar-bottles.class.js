@@ -1,5 +1,4 @@
 class StatusBarBottles extends StatusBar {
-    x = 40;
     y = 10;
     percentage = 0;
     IMAGES = [

@@ -1,5 +1,5 @@
 class StatusBarEndboss extends StatusBar {
-    x = 500;
+    x = 480;
     y = 10;
     percentage = 100;
     IMAGES = [
@@ -10,7 +10,6 @@ class StatusBarEndboss extends StatusBar {
         'img/7_statusbars/2_statusbar_endboss/green/green80.png',
         'img/7_statusbars/2_statusbar_endboss/green/green100.png'
     ];
-
 
     constructor() {
         super();

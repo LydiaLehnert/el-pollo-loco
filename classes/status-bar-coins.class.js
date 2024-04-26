@@ -1,5 +1,4 @@
 class StatusBarCoins extends StatusBar {
-    x = 40;
     y = 55; 
     percentage = 0;
     IMAGES = [

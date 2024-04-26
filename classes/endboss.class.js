@@ -56,6 +56,7 @@ class Endboss extends MovableObject {
         this.loadImages(this.IMAGES_DEAD);
         this.x = 2700;
         this.animate();
+        // this.draw();
     }
 
     animate() {
@@ -71,6 +72,7 @@ class Endboss extends MovableObject {
             } else if (this.hadFirstContact === true) {
                 this.playAnimation(this.IMAGES_WALKING);
                 this.moveLeft();
+                // draw();
             }
         }, 300);
 
@@ -85,5 +87,4 @@ class Endboss extends MovableObject {
             }
         }, 150);
     }
-
 }
