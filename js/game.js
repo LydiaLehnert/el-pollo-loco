@@ -1,6 +1,8 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+let intervalIds = [];           
+let i = 1;
 
 function init() {
     canvas = document.getElementById('canvas');
@@ -88,6 +90,25 @@ function exitFullscreen() {
     } else if (document.webkitExitFullscreen) {
         document.webkitExitFullscreen();
     }
+}
+
+function setStoppableInterval(fn, time) {
+    let id = setInterval(fn, time);         
+    intervalIds.push(id);               
+}
+
+function endGame(outcomeOfGame) {
+    let canvasContainer = document.getElementById('canvas-container');
+
+    intervalIds.forEach(clearInterval); 
+
+    if (outcomeOfGame === "won") {
+        console.log('You won');
+
+    } else if (outcomeOfGame === "lost") {
+        console.log('You lost');
+    }
+
 }
 
 

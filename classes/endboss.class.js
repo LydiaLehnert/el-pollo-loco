@@ -61,7 +61,7 @@ class Endboss extends MovableObject {
 
     animate() {
         let i = 0;
-        setInterval(() => {
+        setStoppableInterval(() => {
             if (world.character.x > 2129 && !this.hadFirstContact) {
                 if (i < 8) {
                     this.playAnimation(this.IMAGES_ALERT);
@@ -72,14 +72,14 @@ class Endboss extends MovableObject {
             } else if (this.hadFirstContact === true) {
                 this.playAnimation(this.IMAGES_WALKING);
                 this.moveLeft();
-                // draw();
             }
         }, 300);
 
 
-        setInterval(() => {
+        setStoppableInterval(() => {
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
+                endGame("won");
             } else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
             } else if (this.isColliding(world.character) && world.character.isHurt()) {

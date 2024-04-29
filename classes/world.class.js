@@ -27,7 +27,7 @@ class World {
     }
 
     run() {
-        setInterval(() => {
+        setStoppableInterval(() => {
             this.checkCollisions();
             this.checkThrowableObjects();
             this.checkBottleHitsEnemies();
@@ -38,13 +38,13 @@ class World {
 
     checkCollisions() {
         if (this.character.isColliding(this.level.endboss)) {
-            this.character.hit(6);
+            this.character.hit(0.6);
             this.statusBarEnergy.setPercentage(this.character.energy);
         }
 
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
-                this.character.hit(3);
+                this.character.hit(0.3);
                 this.statusBarEnergy.setPercentage(this.character.energy);
             }
         });

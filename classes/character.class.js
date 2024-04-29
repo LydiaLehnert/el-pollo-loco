@@ -5,6 +5,7 @@ class Character extends MovableObject {
     speed = 10;
     world;
     walking_sound = new Audio('audio/running.mp3');
+    collect_coin_sound = new Audio('audio/collect-coin.mp3'); 
     
     IMAGES_IDLE = [
         'img/2_character_pepe/1_idle/idle/I-1.png',
@@ -57,14 +58,14 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_IDLE);
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_JUMPING);
-        // this.loadImages(this.IMAGES_HURT);
-        // this.loadImages(this.IMAGES_DEAD);
+        this.loadImages(this.IMAGES_HURT);
+        this.loadImages(this.IMAGES_DEAD);
         this.applyGravity();
         this.animate();
     }
 
     animate() {
-        setInterval(() => {
+        setStoppableInterval(() => {
             this.walking_sound.pause();
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.moveRight();
@@ -87,12 +88,13 @@ class Character extends MovableObject {
         }, 1000 / 60);
 
         //TODO: structure more clearly
-        setInterval(() => {
-            // if (this.isDead()) {                         // commented out for testing
-            //     this.playAnimation(this.IMAGES_DEAD);
-            // } else if (this.isHurt()) {
-            //     this.playAnimation(this.IMAGES_HURT);
-            // } else 
+        setStoppableInterval(() => {
+            if (this.isDead()) {                         
+                this.playAnimation(this.IMAGES_DEAD);
+                endGame("lost");
+            } else if (this.isHurt()) {
+                this.playAnimation(this.IMAGES_HURT);
+            } else 
             if (
                 !keyboard.RIGHT &&
                 !keyboard.LEFT &&
@@ -116,5 +118,6 @@ class Character extends MovableObject {
 
     collectCoin() {
         world.collectedCoins += 20;
+        this.collect_coin_sound.play();
     }
 };

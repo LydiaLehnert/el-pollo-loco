@@ -20,7 +20,7 @@ class ThrowableObject extends MovableObject {
     throw() {
         this.speedY = 30;
         this.applyGravity();
-        this.interval = setInterval(() => {
+        this.interval = setStoppableInterval(() => {
             // TODO Make sure that discard() is called when bottle hits floor or is not in view anymoreddddd
             this.x += 7;
             this.animate();
