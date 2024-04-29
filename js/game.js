@@ -92,6 +92,23 @@ function exitFullscreen() {
     }
 }
 
+function restartGame() {
+    let endscreenImage = document.getElementById('endscreen_img');
+    let restartButton = document.getElementById('restart_button');
+    let endscreenTextWon = document.getElementById('endscreen_text_won');
+    let endscreenTextLost = document.getElementById('endscreen_text_lost')
+
+    endscreenImage.remove();
+    restartButton.remove();
+    if (endscreenTextWon) {
+        endscreenTextWon.remove();
+    } else if (endscreenTextLost) {
+        endscreenTextLost.remove();
+    }
+
+    init();
+}
+
 function setStoppableInterval(fn, time) {
     let id = setInterval(fn, time);
     intervalIds.push(id);
@@ -101,24 +118,23 @@ function endGame(outcomeOfGame) {
     let canvasContainer = document.getElementById('canvas_container');
 
     intervalIds.forEach(clearInterval);
-    canvasContainer.innerHTML = `
-            <img class = "endscreen-img" src ="img/9_intro_outro_screens/background/endscreen.png"></img>
-            <button class = "restart-button"> Play again </button>
-            
+    canvasContainer.innerHTML += `
+            <img id = "endscreen_img" class = "endscreen-img" src ="img/9_intro_outro_screens/background/endscreen.png"></img>
+            <button onclick = "restartGame()" id = "restart_button" class = "restart-button"> Play again </button>
             `;
 
     if (outcomeOfGame === "won") {
-        console.log('You won');
         canvasContainer.innerHTML += `
-            <img class="endscreen-text" src = "img/9_intro_outro_screens/game_over/game over.png">
+            <img id = "endscreen_text_won" class="endscreen-text" src = "img/9_intro_outro_screens/game_over/game over.png">
         `;
 
     } else if (outcomeOfGame === "lost") {
-        console.log('You lost');
         canvasContainer.innerHTML += `
-        <img class="endscreen-text" src = "img/9_intro_outro_screens/game_over/you lost.png">
+        <img id = "endscreen_text_lost"class="endscreen-text" src = "img/9_intro_outro_screens/game_over/you lost.png">
     `;
     }
+
+ 
 
 }
 

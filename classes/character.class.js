@@ -6,6 +6,7 @@ class Character extends MovableObject {
     world;
     walking_sound = new Audio('audio/running.mp3');
     collect_coin_sound = new Audio('audio/collect-coin.mp3'); 
+    // energy = 3;                                                    //only for testing, remove later
     
     IMAGES_IDLE = [
         'img/2_character_pepe/1_idle/idle/I-1.png',
@@ -71,7 +72,6 @@ class Character extends MovableObject {
                 this.moveRight();
                 this.otherDirection = false;
                 this.walking_sound.play();
-                // console.log ('character, x-Koordinate', this.x);
             }
             if (this.world.keyboard.LEFT && this.x > 0) {
                 this.moveLeft();
