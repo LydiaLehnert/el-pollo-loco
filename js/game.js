@@ -1,7 +1,7 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
-let intervalIds = [];           
+let intervalIds = [];
 let i = 1;
 
 function init() {
@@ -93,20 +93,31 @@ function exitFullscreen() {
 }
 
 function setStoppableInterval(fn, time) {
-    let id = setInterval(fn, time);         
-    intervalIds.push(id);               
+    let id = setInterval(fn, time);
+    intervalIds.push(id);
 }
 
 function endGame(outcomeOfGame) {
-    let canvasContainer = document.getElementById('canvas-container');
+    let canvasContainer = document.getElementById('canvas_container');
 
-    intervalIds.forEach(clearInterval); 
+    intervalIds.forEach(clearInterval);
+    canvasContainer.innerHTML = `
+            <img class = "endscreen-img" src ="img/9_intro_outro_screens/background/endscreen.png"></img>
+            <button class = "restart-button"> Play again </button>
+            
+            `;
 
     if (outcomeOfGame === "won") {
         console.log('You won');
+        canvasContainer.innerHTML += `
+            <img class="endscreen-text" src = "img/9_intro_outro_screens/game_over/game over.png">
+        `;
 
     } else if (outcomeOfGame === "lost") {
         console.log('You lost');
+        canvasContainer.innerHTML += `
+        <img class="endscreen-text" src = "img/9_intro_outro_screens/game_over/you lost.png">
+    `;
     }
 
 }

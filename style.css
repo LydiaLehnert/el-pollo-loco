@@ -54,6 +54,32 @@ canvas {
     transform: translate(-50%, -50%); */
  }
 
+.endscreen-img {
+    width: 720px;
+    height: 480px;
+}
+
+.endscreen-text {
+    width: 720px;
+    height: 480px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.restart-button {
+    width: 200px;
+    height: 60px;
+    position: absolute;
+    top: 15%;
+    left: 80%;
+    transform: translate(-50%, -40%);
+    z-index: 2; 
+    border-radius: 16px;
+    border-style: none;
+    background-color: rgb(255,200,29);
+    font-size: 32px;
+}
 
  .fullscreen-icon {
     width: 50px;
