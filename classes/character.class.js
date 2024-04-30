@@ -5,9 +5,10 @@ class Character extends MovableObject {
     speed = 10;
     world;
     walking_sound = new Audio('audio/running.mp3');
-    collect_coin_sound = new Audio('audio/collect-coin.mp3'); 
-    // energy = 3;                                                    //only for testing, remove later
-    
+    collect_coin_sound = new Audio('audio/collect-coin.mp3');
+    energy = 3;
+
+
     IMAGES_IDLE = [
         'img/2_character_pepe/1_idle/idle/I-1.png',
         'img/2_character_pepe/1_idle/idle/I-2.png',
@@ -66,50 +67,78 @@ class Character extends MovableObject {
     }
 
     animate() {
-        setStoppableInterval(() => {
-            this.walking_sound.pause();
-            if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
-                this.moveRight();
-                this.otherDirection = false;
-                this.walking_sound.play();
-            }
-            if (this.world.keyboard.LEFT && this.x > 0) {
-                this.moveLeft();
-                this.otherDirection = true;
-                this.walking_sound.play();
-            }
+        setStoppableInterval(() => this.moveCharacter(), 1000 / 60);
+        setStoppableInterval(() => this.playCharacter(), 200);
+    }
 
-            if (this.world.keyboard.SPACE && !this.isAboveGround()) {
-                this.jump();
-                this.speedY = 30;
-            }
+    moveCharacter() {
+        this.walking_sound.pause();
+        if (this.canMoveRight())
+            this.moveRight();
+        if (this.canMoveLeft())
+            this.moveLeft();
+        if (this.canJump())
+            this.jump();
+        this.world.camera_x = -this.x + 100;
+    }
 
-            this.world.camera_x = -this.x + 100;
-        }, 1000 / 60);
+    canMoveRight() {
+        return this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x;
+    }
 
-        //TODO: structure more clearly
-        setStoppableInterval(() => {
-            if (this.isDead()) {                         
-                this.playAnimation(this.IMAGES_DEAD);
-                endGame("lost");
-            } else if (this.isHurt()) {
-                this.playAnimation(this.IMAGES_HURT);
-            } else 
-            if (
-                !keyboard.RIGHT &&
-                !keyboard.LEFT &&
-                !keyboard.UP &&
-                !keyboard.DOWN &&
-                !keyboard.SPACE &&
-                !keyboard.D
-            ) {
-                this.playAnimation(this.IMAGES_IDLE);
-            } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-                this.playAnimation(this.IMAGES_WALKING);
-            } else if (this.isAboveGround()) {
-                this.playAnimation(this.IMAGES_JUMPING);
-            }
-        }, 200);
+    moveRight() {
+        super.moveRight();
+        this.otherDirection = false;
+        this.walking_sound.play();
+    }
+
+    canMoveLeft() {
+        return this.world.keyboard.LEFT && this.x > 0;
+    }
+
+    moveLeft() {
+        super.moveLeft();
+        this.otherDirection = true;
+        this.walking_sound.play();
+    }
+
+    canJump() {
+        return this.world.keyboard.SPACE && !this.isAboveGround;
+    }
+
+    jump() {
+        super.jump();
+        this.speedY = 30;
+    }
+
+    playCharacter() {
+        if (this.isDead()) {
+            this.playAnimation(this.IMAGES_DEAD);
+            endGame("lost");
+        } else if (this.isHurt()) {
+            this.playAnimation(this.IMAGES_HURT);
+        } else if (this.doesNotMove()) {
+            this.playAnimation(this.IMAGES_IDLE);
+        } else if (this.isWalking) {
+            this.playAnimation(this.IMAGES_WALKING);
+        } else if (this.isAboveGround()) {
+            this.playAnimation(this.IMAGES_JUMPING);
+        }
+    }
+
+    doesNotMove() {
+        return (
+            !keyboard.RIGHT &&
+            !keyboard.LEFT &&
+            !keyboard.UP &&
+            !keyboard.DOWN &&
+            !keyboard.SPACE &&
+            !keyboard.D
+        );
+    }
+
+    isWalking() {
+        this.world.keyboard.RIGHT || this.world.keyboard.LEFT
     }
 
     collectBottle() {

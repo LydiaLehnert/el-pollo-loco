@@ -55,6 +55,23 @@ canvas {
     transform: translate(-50%, -50%); */
  }
 
+
+ .fullscreen-icon {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+ } 
+
+ .fullscreen-icon {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+ }
+
 .endscreen-img {
     width: 720px;
     height: 480px;
@@ -93,13 +110,6 @@ canvas {
     transform: translate(-50%, -40%) scale(1.05);
     }
 
- .fullscreen-icon {
-    width: 50px;
-    height: 50px;
-    position: absolute;
-    bottom: 0;
-    right: 0;
- }
 
 /*Smartphones -----------*/
 @media only screen and (max-width: 720px) {

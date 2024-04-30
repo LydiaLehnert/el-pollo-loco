@@ -1,5 +1,5 @@
 class StatusBarEndboss extends StatusBar {
-    x = 480;
+    x = 460;
     y = 10;
     percentage = 100;
     IMAGES = [

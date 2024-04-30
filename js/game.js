@@ -3,6 +3,7 @@ let world;
 let keyboard = new Keyboard();
 let intervalIds = [];
 let i = 1;
+let audioElements = [];
 
 function init() {
     canvas = document.getElementById('canvas');
@@ -69,6 +70,7 @@ window.addEventListener("keyup", (event) => {
     }
 });
 
+
 function fullscreen() {
     let fullscreen = document.getElementById('fullscreen_container');
     enterFullscreen(fullscreen);
@@ -92,6 +94,11 @@ function exitFullscreen() {
     }
 }
 
+function setStoppableInterval(fn, time) {
+    let id = setInterval(fn, time);
+    intervalIds.push(id);
+}
+
 function restartGame() {
     let endscreenImage = document.getElementById('endscreen_img');
     let restartButton = document.getElementById('restart_button');
@@ -109,18 +116,14 @@ function restartGame() {
     init();
 }
 
-function setStoppableInterval(fn, time) {
-    let id = setInterval(fn, time);
-    intervalIds.push(id);
-}
 
 function endGame(outcomeOfGame) {
     let canvasContainer = document.getElementById('canvas_container');
 
     intervalIds.forEach(clearInterval);
+    world.character.walking_sound.pause();
     canvasContainer.innerHTML += `
-            <img id = "endscreen_img" class = "endscreen-img" src ="img/9_intro_outro_screens/background/endscreen.png"></img>
-            <button onclick = "restartGame()" id = "restart_button" class = "restart-button"> Play again </button>
+            <img id = "endscreen_img" class = "endscreen-img" src ="img/9_intro_outro_screens/background/endscreen.png"></img>           
             `;
 
     if (outcomeOfGame === "won") {
@@ -134,7 +137,13 @@ function endGame(outcomeOfGame) {
     `;
     }
 
- 
+    setTimeout(() => {
+        canvasContainer.innerHTML += `
+        <button onclick = "restartGame()" id = "restart_button" class = "restart-button"> Play again </button>        
+        `
+    }, 2000);
+
+
 
 }
 
