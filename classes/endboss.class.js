@@ -77,14 +77,22 @@ class Endboss extends MovableObject {
 
 
         setStoppableInterval(() => {
-            if (this.isDead()) {
-                this.playAnimation(this.IMAGES_DEAD);
-                endGame("won");
-            } else if (this.isHurt()) {
+            if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
             } else if (this.isColliding(world.character) && world.character.isHurt()) {
                 this.playAnimation(this.IMAGES_ATTACK);
             }
         }, 150);
     }
+
+    playDeadAnimation() {
+        if (this.isDead()) {
+            const animationInterval = setStoppableInterval(() => this.playAnimation(this.IMAGES_DEAD), 200);
+            return animationInterval;
+        } else {
+            return null;
+        }
+    }
+
+
 }

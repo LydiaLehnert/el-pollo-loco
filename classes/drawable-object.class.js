@@ -23,8 +23,6 @@ class DrawableObject {
     draw(ctx) {
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     }
-
-
     
     drawFrame(ctx) {
         if (this instanceof Character
@@ -43,9 +41,10 @@ class DrawableObject {
     }
 
     isColliding(drawableObject) {
-        return this.x + this.width > drawableObject.x &&
+        return (
+            this.x + this.width > drawableObject.x &&
             this.y + this.height > drawableObject.y &&
             this.x < drawableObject.x + drawableObject.width &&
-            this.y < drawableObject.y + drawableObject.height;
+            this.y < drawableObject.y + drawableObject.height);
     }
 }

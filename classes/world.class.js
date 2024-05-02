@@ -31,8 +31,10 @@ class World {
             this.checkCollisions();
             this.checkThrowableObjects();
             this.checkBottleHitsEnemies();
+            // this.checkJumpingOnEnemy();
             this.checkCollectionOfCoins();
             this.checkCollectionOfBottles();
+            this.checkIfGameIsOver();
         }, 20);
     }
 
@@ -62,7 +64,6 @@ class World {
         }
     }
 
-
     checkBottleHitsEnemies() {
         this.throwableObjects.forEach((throwableObject, indexOfThrowableObjects) => {
             if (this.level.endboss.isColliding(throwableObject)) {
@@ -81,15 +82,14 @@ class World {
         });
     }
 
-    checkCollectionOfBottles() {
-        this.level.bottles.forEach((bottle, indexOfBottles) => {
-            if (this.character.isColliding(bottle)) {
-                this.character.collectBottle();
-                this.level.bottles.splice(indexOfBottles, 1);
-                this.statusBarBottles.setPercentage(this.collectedBottles);
-            }
-        });
-    }
+    // checkJumpingOnEnemy() {
+    //     this.level.enemies.forEach((enemy) => {
+    //         if (this.character.jumpedOnEnemy(enemy)) {
+    //             enemy.hit(100);
+    //             //character is not hurt 
+    //         }
+    //     });
+    // }
 
     checkCollectionOfCoins() {
         this.level.coins.forEach((coin, indexOfCoins) => {
@@ -101,7 +101,24 @@ class World {
         });
     }
 
-  
+    checkCollectionOfBottles() {
+        this.level.bottles.forEach((bottle, indexOfBottles) => {
+            if (this.character.isColliding(bottle)) {
+                this.character.collectBottle();
+                this.level.bottles.splice(indexOfBottles, 1);
+                this.statusBarBottles.setPercentage(this.collectedBottles);
+            }
+        });
+    }
+
+    checkIfGameIsOver() {
+        if (this.character.isDead()) {
+            endGame('lost');
+        } else if (world.level.endboss.isDead()) {
+            endGame('won');
+        }
+    }
+
     draw() {
         this.clearAndSetupCanvas();
         this.addObjectsToMap(this.level.backgroundObjects);
@@ -133,7 +150,7 @@ class World {
         this.ctx.translate(-this.camera_x, 0);
     }
 
-    
+
     drawFixedElements() {
         this.ctx.translate(-this.camera_x, 0);
 

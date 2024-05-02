@@ -6,7 +6,7 @@ class Character extends MovableObject {
     world;
     walking_sound = new Audio('audio/running.mp3');
     collect_coin_sound = new Audio('audio/collect-coin.mp3');
-    energy = 3;
+    energy = 100;
 
 
     IMAGES_IDLE = [
@@ -103,7 +103,8 @@ class Character extends MovableObject {
     }
 
     canJump() {
-        return this.world.keyboard.SPACE && !this.isAboveGround;
+        return this.world.keyboard.SPACE
+        && !this.isAboveGround();          //changed for testing
     }
 
     jump() {
@@ -112,10 +113,7 @@ class Character extends MovableObject {
     }
 
     playCharacter() {
-        if (this.isDead()) {
-            this.playAnimation(this.IMAGES_DEAD);
-            endGame("lost");
-        } else if (this.isHurt()) {
+        if (this.isHurt()) {
             this.playAnimation(this.IMAGES_HURT);
         } else if (this.doesNotMove()) {
             this.playAnimation(this.IMAGES_IDLE);
@@ -124,6 +122,15 @@ class Character extends MovableObject {
         } else if (this.isAboveGround()) {
             this.playAnimation(this.IMAGES_JUMPING);
         }
+    }
+
+    playDeadAnimation() {
+        if(this.isDead()) {
+            const animationInterval = setStoppableInterval(() =>this.playAnimation(this.IMAGES_DEAD), 200);
+            return animationInterval;
+        } else {
+        return null;
+        } 
     }
 
     doesNotMove() {
@@ -149,4 +156,16 @@ class Character extends MovableObject {
         world.collectedCoins += 20;
         this.collect_coin_sound.play();
     }
-};
+
+    // jumpedOnEnemy(enemy) {
+    //     if (this.y + this.height > enemy.y) {            //muss zeitlich vorher passieren
+    //         return (
+    //             this.x + this.width > enemy.x &&
+    //             this.x < enemy.x + enemy.width &&
+    //             this.y < enemy.y + enemy.height);
+    //     } else {
+    //         return false;
+    //     }
+    // };
+
+}

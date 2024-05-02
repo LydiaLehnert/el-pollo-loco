@@ -97,6 +97,7 @@ function exitFullscreen() {
 function setStoppableInterval(fn, time) {
     let id = setInterval(fn, time);
     intervalIds.push(id);
+    return id;
 }
 
 function restartGame() {
@@ -112,7 +113,6 @@ function restartGame() {
     } else if (endscreenTextLost) {
         endscreenTextLost.remove();
     }
-
     init();
 }
 
@@ -122,28 +122,32 @@ function endGame(outcomeOfGame) {
 
     intervalIds.forEach(clearInterval);
     world.character.walking_sound.pause();
-    canvasContainer.innerHTML += `
-            <img id = "endscreen_img" class = "endscreen-img" src ="img/9_intro_outro_screens/background/endscreen.png"></img>           
+    const deadAnimationCharacter = world.character.playDeadAnimation();
+    const deadAnimationEndboss = world.level.endboss.playDeadAnimation();
+    setTimeout(() => {
+        if (deadAnimationCharacter) {
+            clearInterval(deadAnimationCharacter);
+        }
+        if (deadAnimationEndboss) {
+            clearInterval(deadAnimationEndboss);
+        }
+
+        canvasContainer.innerHTML += `
+            <img id = "endscreen_img" class = "endscreen-img" src ="img/9_intro_outro_screens/background/endscreen.png"></img>    
+            <button onclick = "restartGame()" id = "restart_button" class = "restart-button"> Play again </button>           
             `;
 
-    if (outcomeOfGame === "won") {
-        canvasContainer.innerHTML += `
+        if (outcomeOfGame === "won") {
+            canvasContainer.innerHTML += `
             <img id = "endscreen_text_won" class="endscreen-text" src = "img/9_intro_outro_screens/game_over/game over.png">
         `;
 
-    } else if (outcomeOfGame === "lost") {
-        canvasContainer.innerHTML += `
+        } else if (outcomeOfGame === "lost") {
+            canvasContainer.innerHTML += `
         <img id = "endscreen_text_lost"class="endscreen-text" src = "img/9_intro_outro_screens/game_over/you lost.png">
     `;
-    }
-
-    setTimeout(() => {
-        canvasContainer.innerHTML += `
-        <button onclick = "restartGame()" id = "restart_button" class = "restart-button"> Play again </button>        
-        `
-    }, 2000);
-
-
+        }
+    }, 1000);
 
 }
 
