@@ -6,12 +6,12 @@ class Character extends MovableObject {
     height = 250;
     speed = 10;
     world;
-    SOUND_WALKING = new Audio('audio/walking.mp3');
-    SOUND_COLLECT_COIN = new Audio('audio/collect-coin.mp3');
-    SOUND_COLLECT_BOTTLE = new Audio('audio/collect-bottle.mp3');
-    SOUND_HURT = new Audio('audio/hurt.mp3');
-    SOUND_JUMP = new Audio('audio/jump.mp3');
-    SOUND_SNORING = new Audio('audio/snoring.mp3');
+    SOUND_WALKING = new Audio ('audio/walking.mp3');
+    SOUND_COLLECT_COIN = new Audio ('audio/collect-coin.mp3');
+    SOUND_COLLECT_BOTTLE = new Audio ('audio/collect-bottle.mp3');
+    SOUND_HURT = new Audio ('audio/hurt.mp3');
+    SOUND_JUMP = new Audio ('audio/jump.mp3');
+    SOUND_SNORING = new Audio ('audio/snoring.mp3');
     
     energy = 100;
     offset = {
@@ -115,17 +115,19 @@ class Character extends MovableObject {
     }
 
     canJump() {
-        return this.world.keyboard.SPACE && !this.isAboveGround();         
+        return this.world.keyboard.SPACE && !this.isAboveGround();        
     }
 
     jump() {
         super.jump();
         this.speedY = 30;
+        playAudio(this.SOUND_JUMP);
     }
 
     playCharacter() {
         if (this.isHurt()) {
             this.playAnimation(this.IMAGES_HURT);
+            playAudio(this.SOUND_HURT);
         } else if (this.doesNotMove()) {
             this.playAnimation(this.IMAGES_IDLE);
         } else if (this.isWalking) {
@@ -161,6 +163,7 @@ class Character extends MovableObject {
 
     collectBottle() {
         world.collectedBottles += 10;
+        playAudio(this.SOUND_COLLECT_BOTTLE);
     };
 
     collectCoin() {

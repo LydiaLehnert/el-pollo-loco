@@ -8,7 +8,7 @@ let audioOn = true;
 
 function init() {
     canvas = document.getElementById('canvas');
-    world = new World(canvas, keyboard);
+    world = new World(canvas, keyboard); 
 }
 
 function startGame() {
@@ -16,6 +16,7 @@ function startGame() {
     let startButton = document.getElementById('start_button');
     startScreen.remove();
     startButton.remove();
+    playAudio(world.SOUND_BACKGROUND); 
 }
 
 window.addEventListener("keydown", (event) => {
@@ -78,7 +79,7 @@ function turnVolumeOff() {
 
     volumeUpIcon.style.zIndex = "-1";
     volumeOffIcon.style.zIndex = "1";
-    audioOn = false;    
+    audioOn = false;
 }
 
 function turnVolumeOn() {
@@ -92,7 +93,7 @@ function turnVolumeOn() {
 
 function playAudio(audio) {
     if (audioOn === true) {
-        audio.play();        
+        audio.play();
     } else if (audioOn === false) {
         audio.pause();
     }
@@ -135,12 +136,14 @@ function restartGame() {
 
     endscreenImage.remove();
     restartButton.remove();
+    world.SOUND_AFTER_GAME.pause();
     if (endscreenTextWon) {
         endscreenTextWon.remove();
     } else if (endscreenTextLost) {
         endscreenTextLost.remove();
     }
     init();
+    playAudio(world.SOUND_BACKGROUND);
 }
 
 
@@ -148,7 +151,7 @@ function endGame(outcomeOfGame) {
     let canvasContainer = document.getElementById('canvas_container');
 
     intervalIds.forEach(clearInterval);
-    world.character.walking_sound.pause();
+    stopGameAudio();
     const deadAnimationCharacter = world.character.playDeadAnimation();
     const deadAnimationEndboss = world.level.endboss.playDeadAnimation();
     setTimeout(() => {
@@ -168,14 +171,24 @@ function endGame(outcomeOfGame) {
             canvasContainer.innerHTML += `
             <img id = "endscreen_text_won" class="endscreen-text" src = "img/9_intro_outro_screens/game_over/you-won.png">
         `;
+            playAudio(world.SOUND_WON);
 
         } else if (outcomeOfGame === "lost") {
             canvasContainer.innerHTML += `
         <img id = "endscreen_text_lost"class="endscreen-text" src = "img/9_intro_outro_screens/game_over/you lost.png">
     `;
+            playAudio(world.SOUND_LOST);
         }
+
     }, 1000);
 
+    setTimeout(() => { 
+        playAudio(world.SOUND_AFTER_GAME);        
+    }, 6500);
 }
 
+function stopGameAudio() {
+    world.character.SOUND_WALKING.pause();
+    world.level.endboss.SOUND_ENDBATTLE.pause();
+}
 

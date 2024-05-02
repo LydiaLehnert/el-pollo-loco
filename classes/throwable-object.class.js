@@ -1,5 +1,7 @@
 class ThrowableObject extends MovableObject {
     interval = null;
+    SOUND_THROW = new Audio('audio/throw-bottle.mp3');
+
     IMAGES_BOTTLE_ROTATION = [
         'img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png',
         'img/6_salsa_bottle/bottle_rotation/2_bottle_rotation.png',
@@ -20,6 +22,7 @@ class ThrowableObject extends MovableObject {
     throw() {
         this.speedY = 30;
         this.applyGravity();
+        playAudio(this.SOUND_THROW);
         this.interval = setStoppableInterval(() => {
             // TODO Make sure that discard() is called when bottle hits floor or is not in view anymoreddddd
             this.x += 7;

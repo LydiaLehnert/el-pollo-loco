@@ -12,6 +12,11 @@ class World {
     throwableObjects = [];
     collectedCoins = 0;
     collectedBottles = 0;
+    SOUND_BACKGROUND = new Audio ('audio/background.mp3');
+    SOUND_WON = new Audio ('audio/won-game.mp3');
+    SOUND_LOST = new Audio ('audio/lost-game.mp3');
+    SOUND_AFTER_GAME = new Audio ('audio/after-game.mp3');
+    
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');

@@ -6,6 +6,8 @@ class Endboss extends MovableObject {
     height = 400;
     speed = 10;
     hadFirstContact = false;
+    SOUND_ENDBATTLE = new Audio('audio/endbattle.mp3');
+    SOUND_IF_HIT = new Audio('audio/chicken.mp3'); 
 
     IMAGES_ALERT = [
         'img/4_enemie_boss_chicken/2_alert/G5.png',
@@ -73,6 +75,8 @@ class Endboss extends MovableObject {
             } else if (this.hadFirstContact === true) {
                 this.playAnimation(this.IMAGES_WALKING);
                 this.moveLeft();
+                world.SOUND_BACKGROUND.pause();
+                playAudio(this.SOUND_ENDBATTLE);
             }
         }, 300);
 
@@ -80,6 +84,7 @@ class Endboss extends MovableObject {
         setStoppableInterval(() => {
             if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
+                playAudio(this.SOUND_IF_HIT);
             } else if (this.isColliding(world.character) && world.character.isHurt()) {
                 this.playAnimation(this.IMAGES_ATTACK);
             }
