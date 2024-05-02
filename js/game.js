@@ -4,6 +4,7 @@ let keyboard = new Keyboard();
 let intervalIds = [];
 let i = 1;
 let audioElements = [];
+let audioOn = true;
 
 function init() {
     canvas = document.getElementById('canvas');
@@ -70,6 +71,32 @@ window.addEventListener("keyup", (event) => {
     }
 });
 
+
+function turnVolumeOff() {
+    let volumeUpIcon = document.getElementById('volume_up_icon');
+    let volumeOffIcon = document.getElementById('volume_off_icon');
+
+    volumeUpIcon.style.zIndex = "-1";
+    volumeOffIcon.style.zIndex = "1";
+    audioOn = false;    
+}
+
+function turnVolumeOn() {
+    let volumeUpIcon = document.getElementById('volume_up_icon');
+    let volumeOffIcon = document.getElementById('volume_off_icon');
+
+    volumeOffIcon.style.zIndex = "-1";
+    volumeUpIcon.style.zIndex = "1";
+    audioOn = true;
+}
+
+function playAudio(audio) {
+    if (audioOn === true) {
+        audio.play();        
+    } else if (audioOn === false) {
+        audio.pause();
+    }
+}
 
 function fullscreen() {
     let fullscreen = document.getElementById('fullscreen_container');
@@ -139,7 +166,7 @@ function endGame(outcomeOfGame) {
 
         if (outcomeOfGame === "won") {
             canvasContainer.innerHTML += `
-            <img id = "endscreen_text_won" class="endscreen-text" src = "img/9_intro_outro_screens/game_over/game over.png">
+            <img id = "endscreen_text_won" class="endscreen-text" src = "img/9_intro_outro_screens/game_over/you-won.png">
         `;
 
         } else if (outcomeOfGame === "lost") {

@@ -27,7 +27,7 @@ class Chicken extends MovableObject {
             if (this.isDead()) {
                 clearInterval(this.chickenWalkingInterval)
                 this.loadImage(this.IMG_DEAD);
-                this.sound_when_hit.play();
+                playAudio(this.sound_when_hit);
                 clearInterval (this.chickenAnimationInterval);
             } else {
                 this.playAnimation(this.IMAGES_WALKING);

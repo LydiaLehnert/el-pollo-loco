@@ -89,7 +89,7 @@ class Character extends MovableObject {
     moveRight() {
         super.moveRight();
         this.otherDirection = false;
-        this.walking_sound.play();
+        playAudio(this.walking_sound);
     }
 
     canMoveLeft() {
@@ -99,12 +99,11 @@ class Character extends MovableObject {
     moveLeft() {
         super.moveLeft();
         this.otherDirection = true;
-        this.walking_sound.play();
+        playAudio(this.walking_sound);
     }
 
     canJump() {
-        return this.world.keyboard.SPACE
-        && !this.isAboveGround();          //changed for testing
+        return this.world.keyboard.SPACE && !this.isAboveGround();         
     }
 
     jump() {
@@ -154,7 +153,7 @@ class Character extends MovableObject {
 
     collectCoin() {
         world.collectedCoins += 20;
-        this.collect_coin_sound.play();
+        playAudio(this.collect_coin_sound);
     }
 
     // jumpedOnEnemy(enemy) {

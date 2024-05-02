@@ -1,8 +1,8 @@
 body {
     display: flex;
     flex-direction: column;
-    justify-content: center; 
-    align-items: center; 
+    justify-content: center;
+    align-items: center;
     background-image: url(img/9_intro_outro_screens/background/desert-5112222_1280.png);
     background-size: cover;
     background-position: center;
@@ -19,7 +19,7 @@ body {
 
 #start_screen {
     width: 720px;
-    height: 480px; 
+    height: 480px;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -34,10 +34,10 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -40%);
-    z-index: 2; 
+    z-index: 2;
     filter: opacity(0.3);
     transition: transform 0.3s ease-in-out;
-  }
+}
 
 #start_button:hover {
     cursor: pointer;
@@ -49,28 +49,43 @@ canvas {
     display: block;
     position: absolute;
     width: 100%;
-    max-height: 100%; 
+    max-height: 100%;
     /* top: 50%;
     left: 50%;
     transform: translate(-50%, -50%); */
- }
+}
 
+.volume-icon {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
 
- .fullscreen-icon {
+#volume_off_icon {
+    z-index: -1;
+}
+
+.volume-icon:hover {
+    cursor: pointer;
+}
+
+.fullscreen-icon {
     width: 50px;
     height: 50px;
     position: absolute;
     bottom: 0;
     right: 0;
- } 
+}
 
- .fullscreen-icon {
+.fullscreen-icon {
     width: 50px;
     height: 50px;
     position: absolute;
     bottom: 0;
     right: 0;
- }
+}
 
 .endscreen-img {
     width: 720px;
@@ -96,27 +111,28 @@ canvas {
     left: 80%;
     transform: translate(-50%, -40%);
     position: absolute;
-    z-index: 4; 
+    z-index: 4;
     border-radius: 16px;
     border-style: none;
-    background-color: rgb(255,200,29);
+    background-color: rgb(255, 200, 29);
     font-size: 32px;
     box-shadow: -2px 2px 2px black;
     transition: transform 0.3s ease-in-out;
 }
 
-.restart-button:hover{
+.restart-button:hover {
     cursor: pointer;
     transform: translate(-50%, -40%) scale(1.05);
-    }
+}
 
 
 /*Smartphones -----------*/
 @media only screen and (max-width: 720px) {
     canvas {
-        width: 100%; 
+        width: 100%;
         max-width: 500px;
     }
+
     h1 {
         display: none;
     }
@@ -125,8 +141,6 @@ canvas {
 /*Smartphones -----------*/
 @media only screen and (max-width: 480px) {
     canvas {
-        height: 100vh; 
+        height: 100vh;
     }
 }
-
-
