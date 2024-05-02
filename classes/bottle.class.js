@@ -1,4 +1,6 @@
 class Bottle extends DrawableObject {
+    scaleFactorX = 0.4;
+    scaleFactorY = 0.7;
     width = 60;
     height = 60; 
     

@@ -1,6 +1,8 @@
 class Chick extends Chicken {
     x = 500 + Math.random() * 2000;
+    scaleFactorX = 0.8;
     y = 378;
+    scaleFactorY = 0.8;
     width = 40; 
     height = 35;
     speed = 0.15  + Math.random() * 0.25;

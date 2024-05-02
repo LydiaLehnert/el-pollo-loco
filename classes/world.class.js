@@ -175,7 +175,8 @@ class World {
             this.flipImage(movableObject);
         }
         movableObject.draw(this.ctx);
-        movableObject.drawFrame(this.ctx);
+        movableObject.drawBigFrameForAllClasses(this.ctx);
+        movableObject.drawIndividualFrameForClass(this.ctx);
 
         if (movableObject.otherDirection) {
             this.flipImageBack(movableObject);

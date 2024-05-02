@@ -1,5 +1,7 @@
 class Endboss extends MovableObject {
+    scaleFactorX = 0.9;
     y = 55;
+    scaleFactorY = 0.8;
     width = 250;
     height = 400;
     speed = 10;
@@ -56,7 +58,6 @@ class Endboss extends MovableObject {
         this.loadImages(this.IMAGES_DEAD);
         this.x = 2700;
         this.animate();
-        // this.draw();
     }
 
     animate() {

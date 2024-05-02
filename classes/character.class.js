@@ -1,13 +1,25 @@
 class Character extends MovableObject {
+    scaleFactorX = 0.6;
     y = 180;
+    scaleFactorY = 0.7;
     width = 150;
     height = 250;
     speed = 10;
     world;
-    walking_sound = new Audio('audio/running.mp3');
-    collect_coin_sound = new Audio('audio/collect-coin.mp3');
+    SOUND_WALKING = new Audio('audio/walking.mp3');
+    SOUND_COLLECT_COIN = new Audio('audio/collect-coin.mp3');
+    SOUND_COLLECT_BOTTLE = new Audio('audio/collect-bottle.mp3');
+    SOUND_HURT = new Audio('audio/hurt.mp3');
+    SOUND_JUMP = new Audio('audio/jump.mp3');
+    SOUND_SNORING = new Audio('audio/snoring.mp3');
+    
     energy = 100;
-
+    offset = {
+        top: 120,
+        bottom: 30,
+        left: 40,
+        right: 30
+    }
 
     IMAGES_IDLE = [
         'img/2_character_pepe/1_idle/idle/I-1.png',
@@ -72,7 +84,7 @@ class Character extends MovableObject {
     }
 
     moveCharacter() {
-        this.walking_sound.pause();
+        this.SOUND_WALKING.pause();
         if (this.canMoveRight())
             this.moveRight();
         if (this.canMoveLeft())
@@ -89,7 +101,7 @@ class Character extends MovableObject {
     moveRight() {
         super.moveRight();
         this.otherDirection = false;
-        playAudio(this.walking_sound);
+        playAudio(this.SOUND_WALKING);
     }
 
     canMoveLeft() {
@@ -99,7 +111,7 @@ class Character extends MovableObject {
     moveLeft() {
         super.moveLeft();
         this.otherDirection = true;
-        playAudio(this.walking_sound);
+        playAudio(this.SOUND_WALKING);
     }
 
     canJump() {
@@ -153,7 +165,7 @@ class Character extends MovableObject {
 
     collectCoin() {
         world.collectedCoins += 20;
-        playAudio(this.collect_coin_sound);
+        playAudio(this.SOUND_COLLECT_COIN);
     }
 
     // jumpedOnEnemy(enemy) {
@@ -166,5 +178,8 @@ class Character extends MovableObject {
     //         return false;
     //     }
     // };
+
+   
+    
 
 }
