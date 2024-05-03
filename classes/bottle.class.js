@@ -3,6 +3,13 @@ class Bottle extends DrawableObject {
     scaleFactorY = 0.7;
     width = 60;
     height = 60; 
+    offset = {
+        top: 10,
+        left: 25,
+        right: 35,
+        bottom: 15
+    };
+
     
 
     constructor() {

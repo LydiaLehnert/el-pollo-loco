@@ -1,13 +1,20 @@
 class Endboss extends MovableObject {
     scaleFactorX = 0.9;
     y = 55;
+    x = 100;
     scaleFactorY = 0.8;
     width = 250;
     height = 400;
-    speed = 10;
+    speed = 10; 
     hadFirstContact = false;
+    offset = {
+        top: 75,
+        left: 8,
+        right: 15,
+        bottom: 85
+    };
     SOUND_ENDBATTLE = new Audio('audio/endbattle.mp3');
-    SOUND_IF_HIT = new Audio('audio/chicken.mp3'); 
+    SOUND_IF_HIT = new Audio('audio/chicken.mp3');  
 
     IMAGES_ALERT = [
         'img/4_enemie_boss_chicken/2_alert/G5.png',

@@ -56,21 +56,15 @@ class DrawableObject {
             || this instanceof Coin
             || this instanceof Bottle
             || this instanceof ThrowableObject) {
-            const smallerRectWidth = this.width * this.scaleFactorX;
-            const smallerRectHeight = this.height * this.scaleFactorY;
-            const smallerRectX = this.x + (this.width - smallerRectWidth) / 2;
-            const smallerRectY = this.y + (this.height - smallerRectHeight) / 2;
-
+        
             ctx.beginPath();
             ctx.lineWidth = '1';
             ctx.strokeStyle = 'red';
-            ctx.rect(smallerRectX, smallerRectY, smallerRectWidth, smallerRectHeight);
+            ctx.rect(this.x + this.offset.left, this.y + this.offset.top, this.width - this.offset.right, this.height - this.offset.bottom);
             ctx.stroke();
         }
     }
-
    
-
     isColliding(drawableObject) {
         return (
             this.x + this.width - this.offset.right > drawableObject.x + drawableObject.offset.left &&

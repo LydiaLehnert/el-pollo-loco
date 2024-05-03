@@ -3,6 +3,13 @@ class Coin extends DrawableObject {
     scaleFactorY = 0.28;
     width = 150;
     height = 150;
+    offset = {
+        top: 55,
+        left: 55,
+        right: 110,
+        bottom: 110
+    };
+
 
     constructor() {
         super().loadImage('img/8_coin/coin_1.png');

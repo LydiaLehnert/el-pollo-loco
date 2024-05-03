@@ -6,6 +6,12 @@ class Chick extends Chicken {
     width = 40; 
     height = 35;
     speed = 0.15  + Math.random() * 0.25;
+    offset = {
+        top: 3,
+        left: 5,
+        right: 10,
+        bottom: 6
+    };
     IMAGES_WALKING = [
         'img/3_enemies_chicken/chicken_small/1_walk/1_w.png',
         'img/3_enemies_chicken/chicken_small/1_walk/2_w.png',

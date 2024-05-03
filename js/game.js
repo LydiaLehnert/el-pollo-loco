@@ -8,7 +8,7 @@ let audioOn = true;
 
 function init() {
     canvas = document.getElementById('canvas');
-    world = new World(canvas, keyboard); 
+    world = new World(canvas, keyboard);
 }
 
 function startGame() {
@@ -16,7 +16,7 @@ function startGame() {
     let startButton = document.getElementById('start_button');
     startScreen.remove();
     startButton.remove();
-    playAudio(world.SOUND_BACKGROUND); 
+    playAudio(world.SOUND_BACKGROUND);
 }
 
 window.addEventListener("keydown", (event) => {
@@ -80,6 +80,7 @@ function turnVolumeOff() {
     volumeUpIcon.style.zIndex = "-1";
     volumeOffIcon.style.zIndex = "1";
     audioOn = false;
+    world.SOUND_BACKGROUND.pause();
 }
 
 function turnVolumeOn() {
@@ -89,6 +90,7 @@ function turnVolumeOn() {
     volumeOffIcon.style.zIndex = "-1";
     volumeUpIcon.style.zIndex = "1";
     audioOn = true;
+    world.SOUND_BACKGROUND.play();
 }
 
 function playAudio(audio) {
@@ -182,8 +184,8 @@ function endGame(outcomeOfGame) {
 
     }, 1000);
 
-    setTimeout(() => { 
-        playAudio(world.SOUND_AFTER_GAME);        
+    setTimeout(() => {
+        playAudio(world.SOUND_AFTER_GAME);
     }, 6500);
 }
 

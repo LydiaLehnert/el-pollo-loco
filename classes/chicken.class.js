@@ -6,6 +6,12 @@ class Chicken extends MovableObject {
     width = 80;
     height = 60;
     speed = 0.1 + Math.random() * 0.25;
+    offset = {
+        top: 5,
+        left: 3,
+        right: 6,
+        bottom: 10
+    };
     SOUND_IF_HIT = new Audio('audio/chicken.mp3'); 
     IMAGES_WALKING = [
         'img/3_enemies_chicken/chicken_normal/1_walk/1_w.png',
@@ -17,7 +23,7 @@ class Chicken extends MovableObject {
     constructor() {
         super().loadImage('img/3_enemies_chicken/chicken_normal/1_walk/1_w.png');
         this.loadImages(this.IMAGES_WALKING);
-        this.animate();
+        // this.animate();
     }
 
     animate() {
