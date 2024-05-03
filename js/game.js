@@ -5,6 +5,7 @@ let intervalIds = [];
 let i = 1;
 let audioElements = [];
 let audioOn = true;
+let gameRestarted = false;
 
 function init() {
     canvas = document.getElementById('canvas');
@@ -14,8 +15,10 @@ function init() {
 function startGame() {
     let startScreen = document.getElementById('start_screen');
     let startButton = document.getElementById('start_button');
+
     startScreen.remove();
     startButton.remove();
+
     playAudio(world.SOUND_BACKGROUND);
 }
 
@@ -136,6 +139,10 @@ function restartGame() {
     let endscreenTextWon = document.getElementById('endscreen_text_won');
     let endscreenTextLost = document.getElementById('endscreen_text_lost')
 
+    gameRestarted = true;
+    world.SOUND_LOST.pause();
+    world.SOUND_WON.pause();
+
     endscreenImage.remove();
     restartButton.remove();
     world.SOUND_AFTER_GAME.pause();
@@ -185,8 +192,10 @@ function endGame(outcomeOfGame) {
     }, 1000);
 
     setTimeout(() => {
+        if (!gameRestarted) {
         playAudio(world.SOUND_AFTER_GAME);
-    }, 6500);
+    }
+}, 6500);
 }
 
 function stopGameAudio() {

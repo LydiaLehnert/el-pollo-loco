@@ -9,8 +9,8 @@ class Chick extends Chicken {
     offset = {
         top: 3,
         left: 5,
-        right: 10,
-        bottom: 6
+        right: 5,
+        bottom: 3
     };
     IMAGES_WALKING = [
         'img/3_enemies_chicken/chicken_small/1_walk/1_w.png',

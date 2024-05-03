@@ -6,20 +6,30 @@ class Character extends MovableObject {
     height = 250;
     speed = 10;
     world;
-    SOUND_WALKING = new Audio ('audio/walking.mp3');
-    SOUND_COLLECT_COIN = new Audio ('audio/collect-coin.mp3');
-    SOUND_COLLECT_BOTTLE = new Audio ('audio/collect-bottle.mp3');
-    SOUND_HURT = new Audio ('audio/hurt.mp3');
-    SOUND_JUMP = new Audio ('audio/jump.mp3');
-    SOUND_SNORING = new Audio ('audio/snoring.mp3');
-    
+    SOUND_WALKING = new Audio('audio/walking.mp3');
+    SOUND_COLLECT_COIN = new Audio('audio/collect-coin.mp3');
+    SOUND_COLLECT_BOTTLE = new Audio('audio/collect-bottle.mp3');
+    SOUND_HURT = new Audio('audio/hurt.mp3');
+    SOUND_JUMP = new Audio('audio/jump.mp3');
+    SOUND_SNORING = new Audio('audio/snoring.mp3');
+
     energy = 100;
-    offset = {
+     offset = {
         top: 100,
-        left: 20,
-        right: 50,
-        bottom: 110
+        left: 25,
+        right: 30,
+        bottom: 10
     };
+    
+
+    // offset = {
+    //     x: 25,                      // left
+    //     y: 100,                      // top
+    //     width: 30,                  // right
+    //     height: 10                 // bottom 
+    // }
+
+
 
     IMAGES_IDLE = [
         'img/2_character_pepe/1_idle/idle/I-1.png',
@@ -32,6 +42,18 @@ class Character extends MovableObject {
         'img/2_character_pepe/1_idle/idle/I-8.png',
         'img/2_character_pepe/1_idle/idle/I-9.png',
         'img/2_character_pepe/1_idle/idle/I-10.png'
+    ];
+    IMAGES_LONG_IDLE = [
+        'img/2_character_pepe/1_idle/long_idle/I-11.png',
+        'img/2_character_pepe/1_idle/long_idle/I-12.png',
+        'img/2_character_pepe/1_idle/long_idle/I-13.png',
+        'img/2_character_pepe/1_idle/long_idle/I-14.png',
+        'img/2_character_pepe/1_idle/long_idle/I-15.png',
+        'img/2_character_pepe/1_idle/long_idle/I-16.png',
+        'img/2_character_pepe/1_idle/long_idle/I-17.png',
+        'img/2_character_pepe/1_idle/long_idle/I-18.png',
+        'img/2_character_pepe/1_idle/long_idle/I-19.png',
+        'img/2_character_pepe/1_idle/long_idle/I-20.png'
     ];
     IMAGES_WALKING = [
         'img/2_character_pepe/2_walk/W-21.png',
@@ -115,7 +137,7 @@ class Character extends MovableObject {
     }
 
     canJump() {
-        return this.world.keyboard.SPACE && !this.isAboveGround();        
+        return this.world.keyboard.SPACE && !this.isAboveGround();
     }
 
     jump() {
@@ -128,9 +150,12 @@ class Character extends MovableObject {
         if (this.isHurt()) {
             this.playAnimation(this.IMAGES_HURT);
             playAudio(this.SOUND_HURT);
-        } else if (this.doesNotMove()) {
+        } else if (this.isIdling()) {
             this.playAnimation(this.IMAGES_IDLE);
-        } else if (this.isWalking) {
+        } else if (this.isIdlingLong) {
+            this.playAnimation(this.IMAGES_LONG_IDLE);
+        }
+        else if (this.isWalking) {
             this.playAnimation(this.IMAGES_WALKING);
         } else if (this.isAboveGround()) {
             this.playAnimation(this.IMAGES_JUMPING);
@@ -138,15 +163,15 @@ class Character extends MovableObject {
     }
 
     playDeadAnimation() {
-        if(this.isDead()) {
-            const animationInterval = setStoppableInterval(() =>this.playAnimation(this.IMAGES_DEAD), 200);
+        if (this.isDead()) {
+            const animationInterval = setStoppableInterval(() => this.playAnimation(this.IMAGES_DEAD), 200);
             return animationInterval;
         } else {
-        return null;
-        } 
+            return null;
+        }
     }
 
-    doesNotMove() {
+    isIdling() {
         return (
             !keyboard.RIGHT &&
             !keyboard.LEFT &&
@@ -182,7 +207,7 @@ class Character extends MovableObject {
     //     }
     // };
 
-   
-    
+
+
 
 }

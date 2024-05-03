@@ -10,8 +10,8 @@ class Endboss extends MovableObject {
     offset = {
         top: 75,
         left: 8,
-        right: 15,
-        bottom: 85
+        right: 10,
+        bottom: 12
     };
     SOUND_ENDBATTLE = new Audio('audio/endbattle.mp3');
     SOUND_IF_HIT = new Audio('audio/chicken.mp3');  
@@ -56,7 +56,6 @@ class Endboss extends MovableObject {
         'img/4_enemie_boss_chicken/5_dead/G25.png',
         'img/4_enemie_boss_chicken/5_dead/G26.png'
     ];
-
 
     constructor() {
         super().loadImage(this.IMAGES_ALERT[0]);
