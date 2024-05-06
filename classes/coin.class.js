@@ -10,14 +10,6 @@ class Coin extends DrawableObject {
         bottom: 55
     };
 
-    // offset = {
-    //     x: 55,                      // left
-    //     y: 55,                      // top
-    //     width: 55,                  // right
-    //     height: 55                 // bottom 
-    // }
-
-
     constructor() {
         super().loadImage('img/8_coin/coin_1.png');
         this.x = 400 + Math.random() * 1800;

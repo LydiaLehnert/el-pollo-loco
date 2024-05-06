@@ -6,31 +6,20 @@ class Character extends MovableObject {
     height = 250;
     speed = 10;
     world;
+    energy = 100;
+    lastAction = new Date();
+    offset = {
+        top: 100,
+        left: 25,
+        right: 30,
+        bottom: 10
+    };
     SOUND_WALKING = new Audio('audio/walking.mp3');
     SOUND_COLLECT_COIN = new Audio('audio/collect-coin.mp3');
     SOUND_COLLECT_BOTTLE = new Audio('audio/collect-bottle.mp3');
     SOUND_HURT = new Audio('audio/hurt.mp3');
     SOUND_JUMP = new Audio('audio/jump.mp3');
     SOUND_SNORING = new Audio('audio/snoring.mp3');
-
-    energy = 100;
-     offset = {
-        top: 100,
-        left: 25,
-        right: 30,
-        bottom: 10
-    };
-    
-
-    // offset = {
-    //     x: 25,                      // left
-    //     y: 100,                      // top
-    //     width: 30,                  // right
-    //     height: 10                 // bottom 
-    // }
-
-
-
     IMAGES_IDLE = [
         'img/2_character_pepe/1_idle/idle/I-1.png',
         'img/2_character_pepe/1_idle/idle/I-2.png',
@@ -92,6 +81,7 @@ class Character extends MovableObject {
     constructor() {
         super().loadImage('img/2_character_pepe/2_walk/W-21.png');
         this.loadImages(this.IMAGES_IDLE);
+        this.loadImages(this.IMAGES_LONG_IDLE);
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_JUMPING);
         this.loadImages(this.IMAGES_HURT);
@@ -121,6 +111,7 @@ class Character extends MovableObject {
     }
 
     moveRight() {
+        this.lastAction = new Date();
         super.moveRight();
         this.otherDirection = false;
         playAudio(this.SOUND_WALKING);
@@ -131,6 +122,7 @@ class Character extends MovableObject {
     }
 
     moveLeft() {
+        this.lastAction = new Date();
         super.moveLeft();
         this.otherDirection = true;
         playAudio(this.SOUND_WALKING);
@@ -141,6 +133,7 @@ class Character extends MovableObject {
     }
 
     jump() {
+        this.lastAction = new Date();
         super.jump();
         this.speedY = 30;
         playAudio(this.SOUND_JUMP);
@@ -150,15 +143,14 @@ class Character extends MovableObject {
         if (this.isHurt()) {
             this.playAnimation(this.IMAGES_HURT);
             playAudio(this.SOUND_HURT);
-        } else if (this.isIdling()) {
-            this.playAnimation(this.IMAGES_IDLE);
-        } else if (this.isIdlingLong) {
+        } else if (this.isLongIdling()) {
             this.playAnimation(this.IMAGES_LONG_IDLE);
-        }
-        else if (this.isWalking) {
+        } else if (this.isWalking()) {
             this.playAnimation(this.IMAGES_WALKING);
         } else if (this.isAboveGround()) {
             this.playAnimation(this.IMAGES_JUMPING);
+        } else {
+            this.playAnimation(this.IMAGES_IDLE);
         }
     }
 
@@ -171,15 +163,8 @@ class Character extends MovableObject {
         }
     }
 
-    isIdling() {
-        return (
-            !keyboard.RIGHT &&
-            !keyboard.LEFT &&
-            !keyboard.UP &&
-            !keyboard.DOWN &&
-            !keyboard.SPACE &&
-            !keyboard.D
-        );
+    isLongIdling() {
+        return this.lastAction.getTime() + 10000 < new Date().getTime();
     }
 
     isWalking() {

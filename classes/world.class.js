@@ -66,6 +66,7 @@ class World {
             this.collectedBottles -= 20;
             this.statusBarBottles.setPercentage(this.collectedBottles);
             this.keyboard.D = false;
+            this.character.lastAction = new Date();
         }
     }
 
