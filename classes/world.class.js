@@ -50,7 +50,7 @@ class World {
         }
 
         this.level.enemies.forEach((enemy) => {
-            if (this.character.isColliding(enemy)) {
+            if (this.character.isColliding(enemy) && !this.character.jumpedOnEnemy(enemy) && !enemy.isDead()) {
                 this.character.hit(0.3);
                 this.statusBarEnergy.setPercentage(this.character.energy);
             }
@@ -92,7 +92,6 @@ class World {
         this.level.enemies.forEach((enemy) => {
             if (this.character.jumpedOnEnemy(enemy)) {
                 enemy.hit(100);
-                //character is not hurt 
             }
         });
     }

@@ -23,6 +23,12 @@ class MovableObject extends DrawableObject {
         }
     }
 
+    isFalling() {
+        if (this.isAboveGround() && this.speedY < 0) {
+            return true; 
+        }
+    }
+
     hit(x) {
         this.energy -= x;
         if (this.energy < 0) {
@@ -60,5 +66,4 @@ class MovableObject extends DrawableObject {
     jump() {
         this.speedY = 30;
     }
-
 }

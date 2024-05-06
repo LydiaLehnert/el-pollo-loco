@@ -145,6 +145,7 @@ class Character extends MovableObject {
             playAudio(this.SOUND_HURT);
         } else if (this.isLongIdling()) {
             this.playAnimation(this.IMAGES_LONG_IDLE);
+            playAudio(this.SOUND_SNORING);
         } else if (this.isWalking()) {
             this.playAnimation(this.IMAGES_WALKING);
         } else if (this.isAboveGround()) {
@@ -182,14 +183,6 @@ class Character extends MovableObject {
     }
 
     jumpedOnEnemy(enemy) {
-        if (this.isAboveGround() && this.y + this.height - this.offset.bottom <= 365 && this.isColliding(enemy)) {
-                return true         
-        } else {
-            return false;
-        }
-    };
-
-
-
-
+        return (this.isFalling() && this.isColliding(enemy)) ? true : false;
+    };   
 }
