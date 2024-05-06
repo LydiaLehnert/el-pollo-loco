@@ -113,7 +113,7 @@ class Character extends MovableObject {
     moveRight() {
         this.lastAction = new Date();
         super.moveRight();
-        this.otherDirection = false;
+        this.direction = "right";
         playAudio(this.SOUND_WALKING);
     }
 
@@ -124,7 +124,7 @@ class Character extends MovableObject {
     moveLeft() {
         this.lastAction = new Date();
         super.moveLeft();
-        this.otherDirection = true;
+        this.direction = "left";
         playAudio(this.SOUND_WALKING);
     }
 
@@ -168,7 +168,7 @@ class Character extends MovableObject {
     }
 
     isWalking() {
-        this.world.keyboard.RIGHT || this.world.keyboard.LEFT
+        return this.world.keyboard.RIGHT || this.world.keyboard.LEFT
     }
 
     collectBottle() {
@@ -181,16 +181,13 @@ class Character extends MovableObject {
         playAudio(this.SOUND_COLLECT_COIN);
     }
 
-    // jumpedOnEnemy(enemy) {
-    //     if (this.y + this.height > enemy.y) {            //muss zeitlich vorher passieren
-    //         return (
-    //             this.x + this.width > enemy.x &&
-    //             this.x < enemy.x + enemy.width &&
-    //             this.y < enemy.y + enemy.height);
-    //     } else {
-    //         return false;
-    //     }
-    // };
+    jumpedOnEnemy(enemy) {
+        if (this.isAboveGround() && this.y + this.height - this.offset.bottom <= 365 && this.isColliding(enemy)) {
+                return true         
+        } else {
+            return false;
+        }
+    };
 
 
 

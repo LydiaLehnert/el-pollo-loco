@@ -36,7 +36,7 @@ class World {
             this.checkCollisions();
             this.checkThrowableObjects();
             this.checkBottleHitsEnemies();
-            // this.checkJumpingOnEnemy();
+            this.checkJumpingOnEnemy();
             this.checkCollectionOfCoins();
             this.checkCollectionOfBottles();
             this.checkIfGameIsOver();
@@ -88,14 +88,14 @@ class World {
         });
     }
 
-    // checkJumpingOnEnemy() {
-    //     this.level.enemies.forEach((enemy) => {
-    //         if (this.character.jumpedOnEnemy(enemy)) {
-    //             enemy.hit(100);
-    //             //character is not hurt 
-    //         }
-    //     });
-    // }
+    checkJumpingOnEnemy() {
+        this.level.enemies.forEach((enemy) => {
+            if (this.character.jumpedOnEnemy(enemy)) {
+                enemy.hit(100);
+                //character is not hurt 
+            }
+        });
+    }
 
     checkCollectionOfCoins() {
         this.level.coins.forEach((coin, indexOfCoins) => {
@@ -177,14 +177,14 @@ class World {
     }
 
     addToMap(movableObject) {
-        if (movableObject.otherDirection) {
+        if (movableObject.direction === "left") {
             this.flipImage(movableObject);
         }
         movableObject.draw(this.ctx);
         movableObject.drawBigFrameForAllClasses(this.ctx);
         movableObject.drawIndividualFrameForClass(this.ctx);
 
-        if (movableObject.otherDirection) {
+        if (movableObject.direction === "left") {
             this.flipImageBack(movableObject);
         }
     }
