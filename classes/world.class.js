@@ -12,11 +12,12 @@ class World {
     throwableObjects = [];
     collectedCoins = 0;
     collectedBottles = 0;
-    SOUND_BACKGROUND = new Audio ('audio/background.mp3');
-    SOUND_WON = new Audio ('audio/won-game.mp3');
-    SOUND_LOST = new Audio ('audio/lost-game.mp3');
-    SOUND_AFTER_GAME = new Audio ('audio/after-game.mp3');
-    
+    lastBottleThrow = new Date().getTime();
+    SOUND_BACKGROUND = new Audio('audio/background.mp3');
+    SOUND_WON = new Audio('audio/won-game.mp3');
+    SOUND_LOST = new Audio('audio/lost-game.mp3');
+    SOUND_AFTER_GAME = new Audio('audio/after-game.mp3');
+
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -58,16 +59,26 @@ class World {
     }
 
     checkThrowableObjects() {
-        if (this.keyboard.D
-            // && this.collectedBottles > 0
+        let bottle;
+        if (this.keyboard.D && this.isEnoughTimeBetweenTheLastBottleThrow() && this.collectedBottles > 0
         ) {
-            let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
+            if (this.character.direction === "right") {
+                bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
+            } else {
+                bottle = new ThrowableObject(this.character.x, this.character.y + 100);
+            }
+
             this.throwableObjects.push(bottle);
-            this.collectedBottles -= 20;
+            this.collectedBottles -= 10;
             this.statusBarBottles.setPercentage(this.collectedBottles);
             this.keyboard.D = false;
             this.character.lastAction = new Date();
+            this.lastBottleThrow = new Date().getTime();
         }
+    }
+
+    isEnoughTimeBetweenTheLastBottleThrow() {
+        return new Date().getTime() > this.lastBottleThrow + 1500;
     }
 
     checkBottleHitsEnemies() {

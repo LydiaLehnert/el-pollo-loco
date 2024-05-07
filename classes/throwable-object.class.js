@@ -10,37 +10,37 @@ class ThrowableObject extends MovableObject {
     ]
 
     constructor(x, y) {
-        super().loadImage('img/2_character_pepe/1_idle/idle/I-1.png');
+        super().loadImage('img/6_salsa_bottle/1_salsa_bottle_on_ground.png');
         this.loadImages(this.IMAGES_BOTTLE_ROTATION);
         this.x = x;
         this.y = y;
         this.width = 50;
         this.height = 60;
-        this.throw();
+        this.throwObject();
     }
 
-    throw() {
+    throwObject() {
         this.speedY = 30;
         this.applyGravity();
         playAudio(this.SOUND_THROW);
         if (world.character.direction === "right") {
             this.throwRight();
-        } else {this.throwLeft() }
+        } else { this.throwLeft() }
         this.animate();
     }
 
     throwRight() {
         this.interval = setStoppableInterval(() => {
-            // TODO Make sure that discard() is called when bottle hits floor or is not in view anymoreddddd
+            // TODO Make sure that discard() is called when bottle hits floor or is not in view anymore
             this.x += 7;
         }, 25);
     }
 
     throwLeft() {
         this.interval = setStoppableInterval(() => {
-            // TODO Make sure that discard() is called when bottle hits floor or is not in view anymoreddddd
+            // TODO Make sure that discard() is called when bottle hits floor or is not in view anymore
             this.x -= 7;
-       
+
         }, 25);
 
     }

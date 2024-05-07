@@ -1,10 +1,8 @@
 class Character extends MovableObject {
-    scaleFactorX = 0.6;
     y = 180;
-    scaleFactorY = 0.7;
     width = 150;
     height = 250;
-    speed = 10;
+    speed = 10;                 // for testing: change to 2
     world;
     energy = 100;
     lastAction = new Date();
@@ -79,7 +77,7 @@ class Character extends MovableObject {
     ];
 
     constructor() {
-        super().loadImage('img/2_character_pepe/2_walk/W-21.png');
+        super().loadImage('img/2_character_pepe/1_idle/idle/I-1.png');
         this.loadImages(this.IMAGES_IDLE);
         this.loadImages(this.IMAGES_LONG_IDLE);
         this.loadImages(this.IMAGES_WALKING);
@@ -145,7 +143,7 @@ class Character extends MovableObject {
             playAudio(this.SOUND_HURT);
         } else if (this.isLongIdling()) {
             this.playAnimation(this.IMAGES_LONG_IDLE);
-            playAudio(this.SOUND_SNORING);
+            // playAudio(this.SOUND_SNORING);
         } else if (this.isWalking()) {
             this.playAnimation(this.IMAGES_WALKING);
         } else if (this.isAboveGround()) {
