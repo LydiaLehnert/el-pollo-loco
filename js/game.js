@@ -19,7 +19,7 @@ function startGame() {
     startScreen.remove();
     startButton.remove();
 
-    playAudio(world.SOUND_BACKGROUND);
+    // playAudio(world.SOUND_BACKGROUND);
 }
 
 window.addEventListener("keydown", (event) => {

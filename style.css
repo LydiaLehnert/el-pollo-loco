@@ -3,18 +3,25 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-image: url(img/9_intro_outro_screens/background/desert-5112222_1280.png);
+    background-image: url('img/5_background/background-picture.png');
     background-size: cover;
     background-position: center;
+    background-color: rgba(255, 255, 255, 0.4);
+    background-blend-mode: overlay;
     height: 100vh;
     margin: 0;
+}
+
+h1 {
+    font-size: 40px;
+    letter-spacing: 3px;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
 }
 
 .canvas-container {
     position: relative;
     width: 720px;
     height: 480px;
-    /* aspect-ratio: auto 720/480; */
 }
 
 #start_screen {
@@ -24,7 +31,7 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 1;
+    z-index: 1;    
 }
 
 #start_button {
@@ -50,9 +57,6 @@ canvas {
     position: absolute;
     width: 100%;
     max-height: 100%;
-    /* top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); */
 }
 
 .volume-icon {
@@ -69,6 +73,19 @@ canvas {
 
 .volume-icon:hover {
     cursor: pointer;
+}
+
+#small_screen_container {
+    display: none;
+}
+
+#screen_rotation_icon {
+    width: 200px;
+}
+
+#turn_device_message {
+    font-size: 32px;
+    font-weight: bold;
 }
 
 .endscreen-img {
@@ -111,9 +128,16 @@ canvas {
 
 /*Smartphones -----------*/
 @media only screen and (max-width: 720px) {
-    canvas {
+    .canvas-container {
         width: 100%;
-        max-width: 500px;
+    }
+
+    #start_screen,
+    canvas,
+    #endscreen_img,
+    #endscreen_text_won,
+    #endscreen_text_lost {
+        width: 100%;
     }
 
     h1 {
@@ -122,8 +146,47 @@ canvas {
 }
 
 /*Smartphones -----------*/
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 600px) {
+
+    body {
+        background-image: url('img/5_background/background-picture.png');
+        background-color: rgba(255, 255, 255, 0.6);
+    }
+
+    #small_screen_container {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #turn_device_message {
+        text-align: center;
+    }
+
+    #start_screen,
+    #start_button,
+    canvas,
+    .volume-icon,
+    #endscreen_img,
+    #endscreen_text_won,
+    #endscreen_text_lost {
+        display: none;
+    }
+}
+
+/*Smartphones -----------*/
+@media only screen and (max-height: 480px) {
+    .canvas-container {
+       height: 100vh;
+    }
+
     canvas {
         height: 100vh;
+    }
+
+    h1 {
+        display: none;
     }
 }
