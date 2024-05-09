@@ -1,6 +1,6 @@
 let canvas;
 let world;
-let keyboard = new Keyboard();
+
 let intervalIds = [];
 let i = 1;
 let audioElements = [];
@@ -8,7 +8,8 @@ let audioOn = true;
 let gameRestarted = false;
 
 function init() {
-    canvas = document.getElementById('canvas');
+ let keyboard = new Keyboard();   
+ canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
 }
 
@@ -31,14 +32,6 @@ window.addEventListener("keydown", (event) => {
         keyboard.LEFT = true;
     }
 
-    if (event.keyCode == 38) {
-        keyboard.UP = true;
-    }
-
-    if (event.keyCode == 40) {
-        keyboard.DOWN = true;
-    }
-
     if (event.keyCode == 32) {
         keyboard.SPACE = true;
     }
@@ -56,14 +49,6 @@ window.addEventListener("keyup", (event) => {
 
     if (event.keyCode == 37) {
         keyboard.LEFT = false;
-    }
-
-    if (event.keyCode == 38) {
-        keyboard.UP = false;
-    }
-
-    if (event.keyCode == 40) {
-        keyboard.DOWN = false;
     }
 
     if (event.keyCode == 32) {
