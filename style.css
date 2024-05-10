@@ -16,6 +16,7 @@ body {
 h1 {
     font-size: 40px;
     letter-spacing: 1px;
+    color: rgb(160,34,10);  
 }
 
 .canvas-container {
@@ -23,10 +24,6 @@ h1 {
     width: 720px;
     height: 480px;
 }
-
-/* ==========================
-
-==============================*/
 
 /* =========
 STARTSCREEN
@@ -79,12 +76,12 @@ canvas {
     right: 0;
 }
 
-#volume_off_icon {
-    z-index: -1;
-}
-
 .volume-icon:hover {
     cursor: pointer;
+}
+
+#volume_off_icon {
+    z-index: -1;
 }
 
 /* =========
@@ -106,13 +103,38 @@ SMALL SCREEN
 /* ================
 MOBILE TOUCH BUTTONS
 ===================*/
+.mobile-touch-button-container {
+    display: none;
+}
+
+.mobile-touch-buttons-bottom {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
 
 .mobile-touch-button {
     width: 32px;
     background-color: rgb(255, 197, 33);
     border-radius: 100%;
     border-style: double;
+    margin: 8px;
     /* display: none;  */
+}
+
+.volume-button {
+    position: absolute;
+    right: 0;
+}
+
+.volume-button:hover {
+    cursor: pointer;
+}
+
+#volume_off_button {
+    z-index: -1;
 }
 
 /* ======
@@ -163,15 +185,14 @@ RESPONSIVE-DESIGN
 
 /* Break point 1 (max-width: 720px)*/
 @media only screen and (max-width: 720px) {
-    .canvas-container {
-        width: 100%;
-    }
 
+    .canvas-container,
     #start_screen,
     canvas,
     #endscreen_img,
     #endscreen_text_won,
-    #endscreen_text_lost {
+    #endscreen_text_lost,
+    .mobile-touch-button-container {
         width: 100%;
     }
 
@@ -180,16 +201,14 @@ RESPONSIVE-DESIGN
     }
 }
 
-/* Break point 1 (max-width: 600px)*/
+/* Break point 2 (max-width: 600px)*/
 @media only screen and (max-width: 600px) {
 
     body {
-        background-image: url('img/5_background/background-picture.png');
         background-color: rgba(255, 255, 255, 0.6);
     }
 
     #small_screen_container {
-        position: absolute;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -209,31 +228,33 @@ RESPONSIVE-DESIGN
     #endscreen_text_lost {
         display: none;
     }
-
-    /* .mobile-touch-button {
-        display: flex;
-    } */
-    
 }
 
+/* Break point 3 (max-height: 600px)*/
+@media only screen and (max-height: 600px) {
 
-/* Break point 3 (max-height: 480px)*/
-@media only screen and (max-height: 480px) {
-    .canvas-container {
-        height: 100vh;
-        width: 100%;
-    }
-
+    .canvas-container,
     canvas,
     #start_screen,
     #endscreen_img,
     #endscreen_text_won,
-    #endscreen_text_lost {
+    #endscreen_text_lost,
+    .mobile-touch-button-container {
         height: 100vh;
-        object-fit: contain;
+        width: 100%;
+        /* object-fit: contain; */
     }
 
     h1 {
+        display: none;
+    }
+
+    .mobile-touch-button-container {
+        display: block;
+    }
+
+    #volume_on_icon,
+    #volume_off_icon {
         display: none;
     }
 }

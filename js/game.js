@@ -8,8 +8,8 @@ let audioOn = true;
 let gameRestarted = false;
 
 function init() {
- let keyboard = new Keyboard();   
- canvas = document.getElementById('canvas');
+    let keyboard = new Keyboard();
+    canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
 }
 
@@ -20,66 +20,50 @@ function startGame() {
     startScreen.remove();
     startButton.remove();
 
-    // playAudio(world.SOUND_BACKGROUND);
+    playAudio(world.SOUND_BACKGROUND);
 }
 
-window.addEventListener("keydown", (event) => {
-    if (event.keyCode == 39) {
-        keyboard.RIGHT = true;
-    }
-
-    if (event.keyCode == 37) {
-        keyboard.LEFT = true;
-    }
-
-    if (event.keyCode == 32) {
-        keyboard.SPACE = true;
-    }
-
-    if (event.keyCode == 68) {
-        keyboard.D = true;
-    }
-});
-
-
-window.addEventListener("keyup", (event) => {
-    if (event.keyCode == 39) {
-        keyboard.RIGHT = false;
-    }
-
-    if (event.keyCode == 37) {
-        keyboard.LEFT = false;
-    }
-
-    if (event.keyCode == 32) {
-        keyboard.SPACE = false;
-    }
-
-    if (event.keyCode == 68) {
-        keyboard.D = false;
-    }
-});
-
-
 function turnVolumeOff() {
-    let volumeUpIcon = document.getElementById('volume_up_icon');
-    let volumeOffIcon = document.getElementById('volume_off_icon');
+    let volumeOnIconScreenview = document.getElementById('volume_on_icon');
+    let volumeOffIconScreenview = document.getElementById('volume_off_icon');
+    let volumeOnButtonMobileDesign = document.getElementById('volume_on_button');
+    let volumeOffButtonMobileDesign = document.getElementById('volume_off_button');
 
-    volumeUpIcon.style.zIndex = "-1";
-    volumeOffIcon.style.zIndex = "1";
+    const isMobile = volumeOnIconScreenview.checkVisibility();
+
+    if (isMobile) {
+        volumeOnIconScreenview.style.zIndex = -1;
+        volumeOffIconScreenview.style.zIndex = 1;
+        console.log('volumeOffScreenview');
+    } else{
+        volumeOnButtonMobileDesign.style.zIndex = -1;
+        volumeOffButtonMobileDesign.style.zIndex = 1;
+        console.log('volumeOffResponsive');
+    }
     audioOn = false;
     world.SOUND_BACKGROUND.pause();
 }
 
 function turnVolumeOn() {
-    let volumeUpIcon = document.getElementById('volume_up_icon');
-    let volumeOffIcon = document.getElementById('volume_off_icon');
+    let volumeOnIconScreenview = document.getElementById('volume_on_icon');
+    let volumeOffIconScreenview = document.getElementById('volume_off_icon');
+    let volumeOnButtonMobileDesign = document.getElementById('volume_on_button');
+    let volumeOffButtonMobileDesign = document.getElementById('volume_off_button');
 
-    volumeOffIcon.style.zIndex = "-1";
-    volumeUpIcon.style.zIndex = "1";
+    const isMobile = volumeOnIconScreenview.checkVisibility();
+
+    if (isMobile) {
+    volumeOffIconScreenview.style.zIndex = -1;
+    volumeOnIconScreenview.style.zIndex = 1;
+    } {
+    volumeOffButtonMobileDesign.style.zIndex = -1;
+    volumeOnButtonMobileDesign.style.zIndex = 1;
+    }
+
     audioOn = true;
     world.SOUND_BACKGROUND.play();
 }
+
 
 function playAudio(audio) {
     if (audioOn === true) {
@@ -104,10 +88,11 @@ function restartGame() {
     gameRestarted = true;
     world.SOUND_LOST.pause();
     world.SOUND_WON.pause();
+    world.SOUND_AFTER_GAME.pause();
 
     endscreenImage.remove();
     restartButton.remove();
-    world.SOUND_AFTER_GAME.pause();
+
     if (endscreenTextWon) {
         endscreenTextWon.remove();
     } else if (endscreenTextLost) {
@@ -154,9 +139,9 @@ function endGame(outcomeOfGame) {
 
     setTimeout(() => {
         if (!gameRestarted) {
-        playAudio(world.SOUND_AFTER_GAME);
-    }
-}, 6500);
+            playAudio(world.SOUND_AFTER_GAME);
+        }
+    }, 6500);
 }
 
 function stopGameAudio() {

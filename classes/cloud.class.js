@@ -19,5 +19,4 @@ class Cloud extends MovableObject {
 }
 
 
-// X-Koordinate muss mit der Zeit immer weniger werden 
 
