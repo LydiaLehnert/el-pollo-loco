@@ -137,17 +137,9 @@ class World {
 
     draw() {
         this.clearAndSetupCanvas();
-        this.addObjectsToMap(this.level.backgroundObjects);
-        this.addToMap(this.character);
-        this.addObjectsToMap(this.level.clouds);
-
+        this.addCharacterAndLandscape();
         this.drawFixedElements();
-
-        this.addObjectsToMap(this.throwableObjects);
-        this.addObjectsToMap(this.level.bottles);
-        this.addObjectsToMap(this.level.coins);
-        this.addObjectsToMap(this.level.enemies);
-        this.addToMap(this.level.endboss);
+        this.addCollectableObjectsAndEnemies();
 
         this.resetCanvasTranslation();
 
@@ -162,10 +154,11 @@ class World {
         this.ctx.translate(this.camera_x, 0);
     }
 
-    resetCanvasTranslation() {
-        this.ctx.translate(-this.camera_x, 0);
+    addCharacterAndLandscape() {
+        this.addObjectsToMap(this.level.backgroundObjects);
+        this.addToMap(this.character);
+        this.addObjectsToMap(this.level.clouds);
     }
-
 
     drawFixedElements() {
         this.ctx.translate(-this.camera_x, 0);
@@ -178,6 +171,18 @@ class World {
         }
 
         this.ctx.translate(this.camera_x, 0);
+    }
+
+    addCollectableObjectsAndEnemies() {                
+        this.addObjectsToMap(this.throwableObjects);
+        this.addObjectsToMap(this.level.bottles);
+        this.addObjectsToMap(this.level.coins);
+        this.addObjectsToMap(this.level.enemies);
+        this.addToMap(this.level.endboss);
+    }
+
+    resetCanvasTranslation() {
+        this.ctx.translate(-this.camera_x, 0);
     }
 
     addObjectsToMap(objects) {

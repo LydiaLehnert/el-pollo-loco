@@ -4,7 +4,6 @@ class Character extends MovableObject {
     height = 250;
     speed = 10;                 // for testing: change to 2
     world;
-    energy = 100;
     lastAction = new Date();
     offset = {
         top: 100,
@@ -89,7 +88,7 @@ class Character extends MovableObject {
     }
 
     animate() {
-        setStoppableInterval(() => this.moveCharacter(), 1000 / 60);
+        setStoppableInterval(() => this.moveCharacter(), 1000/60 );
         setStoppableInterval(() => this.playCharacter(), 200);
     }
 
@@ -143,22 +142,13 @@ class Character extends MovableObject {
             playAudio(this.SOUND_HURT);
         } else if (this.isLongIdling()) {
             this.playAnimation(this.IMAGES_LONG_IDLE);
-            // playAudio(this.SOUND_SNORING);
+            playAudio(this.SOUND_SNORING);
         } else if (this.isWalking()) {
             this.playAnimation(this.IMAGES_WALKING);
         } else if (this.isAboveGround()) {
             this.playAnimation(this.IMAGES_JUMPING);
         } else {
             this.playAnimation(this.IMAGES_IDLE);
-        }
-    }
-
-    playDeadAnimation() {
-        if (this.isDead()) {
-            const animationInterval = setStoppableInterval(() => this.playAnimation(this.IMAGES_DEAD), 200);
-            return animationInterval;
-        } else {
-            return null;
         }
     }
 

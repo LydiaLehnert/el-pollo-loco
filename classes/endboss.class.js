@@ -5,7 +5,7 @@ class Endboss extends MovableObject {
     scaleFactorY = 0.8;
     width = 250;
     height = 400;
-    speed = 10; 
+    speed = 10;
     hadFirstContact = false;
     offset = {
         top: 75,
@@ -14,7 +14,7 @@ class Endboss extends MovableObject {
         bottom: 12
     };
     SOUND_ENDBATTLE = new Audio('audio/endbattle.mp3');
-    SOUND_IF_HIT = new Audio('audio/chicken.mp3');  
+    SOUND_IF_HIT = new Audio('audio/chicken.mp3');
 
     IMAGES_ALERT = [
         'img/4_enemie_boss_chicken/2_alert/G5.png',
@@ -66,43 +66,44 @@ class Endboss extends MovableObject {
         this.loadImages(this.IMAGES_DEAD);
         this.x = 2700;
         this.animate();
+        this.i = 0;
     }
 
     animate() {
-        let i = 0;
-        setStoppableInterval(() => {
-            if (world.character.x > 2129 && !this.hadFirstContact) {
-                if (i < 8) {
-                    this.playAnimation(this.IMAGES_ALERT);
-                    i++;
-                } else {
-                    this.hadFirstContact = true;
-                }
-            } else if (this.hadFirstContact === true) {
-                this.playAnimation(this.IMAGES_WALKING);
-                this.moveLeft();
-                world.SOUND_BACKGROUND.pause();
-                playAudio(this.SOUND_ENDBATTLE);
-            }
-        }, 300);
-
-
-        setStoppableInterval(() => {
-            if (this.isHurt()) {
-                this.playAnimation(this.IMAGES_HURT);
-                playAudio(this.SOUND_IF_HIT);
-            } else if (this.isColliding(world.character) && world.character.isHurt()) {
-                this.playAnimation(this.IMAGES_ATTACK);
-            }
-        }, 150);
+        setStoppableInterval(() => this.moveEndboss(), 300);
+        setStoppableInterval(() => this.playEndboss(), 150);
     }
 
-    playDeadAnimation() {
-        if (this.isDead()) {
-            const animationInterval = setStoppableInterval(() => this.playAnimation(this.IMAGES_DEAD), 200);
-            return animationInterval;
-        } else {
-            return null;
+    moveEndboss() {
+        if (this.encountersCharacterForTheFirstTime()) {
+            if (i < 8) {
+                this.playAnimation(this.IMAGES_ALERT);
+                i++;
+            } else {
+                this.hadFirstContact = true;
+            }
+        } else if (this.hadFirstContact === true) {
+            this.startEndbattle();
+        }
+    }
+
+    encountersCharacterForTheFirstTime() {
+         return world.character.x > 2129 && !this.hadFirstContact;
+    }
+
+    startEndbattle() {
+        this.playAnimation(this.IMAGES_WALKING);
+        this.moveLeft();
+        world.SOUND_BACKGROUND.pause();
+        playAudio(this.SOUND_ENDBATTLE);
+    }
+
+    playEndboss() {
+        if (this.isHurt()) {
+            this.playAnimation(this.IMAGES_HURT);
+            playAudio(this.SOUND_IF_HIT);
+        } else if (this.isColliding(world.character) && world.character.isHurt()) {
+            this.playAnimation(this.IMAGES_ATTACK);
         }
     }
 }

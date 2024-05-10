@@ -3,7 +3,7 @@ class MovableObject extends DrawableObject {
     direction = "right";
     speedY = 0;
     acceleration = 2.5;
-    energy = 100;
+    energy = 100;             // for testing
     lastHit = 0;
 
     applyGravity() {
@@ -65,5 +65,14 @@ class MovableObject extends DrawableObject {
 
     jump() {
         this.speedY = 30;
+    }
+
+    playDeadAnimation() {
+        if (this.isDead()) {
+            const animationInterval = setStoppableInterval(() => this.playAnimation(this.IMAGES_DEAD), 200);
+            return animationInterval;
+        } else {
+            return null;
+        }
     }
 }
