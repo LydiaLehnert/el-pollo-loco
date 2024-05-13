@@ -197,7 +197,7 @@ function stopDeadAnimation(deadAnimationCharacter, deadAnimationEndboss) {
  */
 function showEndscreenImage(canvasContainer) {
     canvasContainer.innerHTML += `
-    <img id = "endscreen_img" class = "endscreen-img" src ="img/9_intro_outro_screens/game_over/endscreen.png"></img>    
+    <img id = "endscreen_img" class = "endscreen-img" src ="assets/img/9_intro_outro_screens/game_over/endscreen.png"></img>    
     <button onclick = "restartGame()" id = "restart_button" class = "restart-button"> Play again </button>           
     `;
 }
@@ -210,13 +210,13 @@ function showEndscreenImage(canvasContainer) {
 function showEndscreenTextAndPlayAudio(canvasContainer, outcomeOfGame) {
     if (outcomeOfGame === "won") {
         canvasContainer.innerHTML += `
-        <img id = "endscreen_text_won" class="endscreen-text" src = "img/9_intro_outro_screens/game_over/you-won.png">
+        <img id = "endscreen_text_won" class="endscreen-text" src = "assets/img/9_intro_outro_screens/game_over/you-won.png">
     `;
         playAudio(world.SOUND_WON);
 
     } else if (outcomeOfGame === "lost") {
         canvasContainer.innerHTML += `
-    <img id = "endscreen_text_lost"class="endscreen-text" src = "img/9_intro_outro_screens/game_over/you lost.png">
+    <img id = "endscreen_text_lost"class="endscreen-text" src = "assets/img/9_intro_outro_screens/game_over/you lost.png">
 `;
         playAudio(world.SOUND_LOST);
     }

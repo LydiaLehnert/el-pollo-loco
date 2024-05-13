@@ -3,7 +3,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-image: url('img/5_background/background-picture.png');
+    background-image: url('assets/img/5_background/background-picture.png');
     background-size: cover;
     background-position: center;
     background-color: rgba(255, 255, 255, 0.4);

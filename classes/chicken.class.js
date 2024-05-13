@@ -10,19 +10,19 @@ class Chicken extends MovableObject {
         right: 3,
         bottom: 5
     };
-    SOUND_IF_HIT = new Audio('audio/chicken.mp3');
+    SOUND_IF_HIT = new Audio('assets/audio/chicken.mp3');
     IMAGES_WALKING = [
-        'img/3_enemies_chicken/chicken_normal/1_walk/1_w.png',
-        'img/3_enemies_chicken/chicken_normal/1_walk/2_w.png',
-        'img/3_enemies_chicken/chicken_normal/1_walk/3_w.png'
+        'assets/img/3_enemies_chicken/chicken_normal/1_walk/1_w.png',
+        'assets/img/3_enemies_chicken/chicken_normal/1_walk/2_w.png',
+        'assets/img/3_enemies_chicken/chicken_normal/1_walk/3_w.png'
     ];
-    IMG_DEAD = 'img/3_enemies_chicken/chicken_normal/2_dead/dead.png';
+    IMG_DEAD = 'assets/img/3_enemies_chicken/chicken_normal/2_dead/dead.png';
 
     /**
      * Creates a new instance of Chicken and loads necessary images
      */
     constructor() {
-        super().loadImage('img/3_enemies_chicken/chicken_normal/1_walk/1_w.png');
+        super().loadImage('assets/img/3_enemies_chicken/chicken_normal/1_walk/1_w.png');
         this.loadImages(this.IMAGES_WALKING);
         this.animate();
     }

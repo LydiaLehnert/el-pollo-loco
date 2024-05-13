@@ -13,10 +13,10 @@ class World {
     collectedCoins = 0;
     collectedBottles = 0;
     lastBottleThrow = new Date().getTime();
-    SOUND_BACKGROUND = new Audio('audio/background.mp3');
-    SOUND_WON = new Audio('audio/won-game.mp3');
-    SOUND_LOST = new Audio('audio/lost-game.mp3');
-    SOUND_AFTER_GAME = new Audio('audio/after-game.mp3');
+    SOUND_BACKGROUND = new Audio('assets/audio/background.mp3');
+    SOUND_WON = new Audio('assets/audio/won-game.mp3');
+    SOUND_LOST = new Audio('assets/audio/lost-game.mp3');
+    SOUND_AFTER_GAME = new Audio('assets/audio/after-game.mp3');
 
     /**
      *  Constructs a new instance of World

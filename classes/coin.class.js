@@ -12,7 +12,7 @@ class Coin extends DrawableObject {
  * Creates an instance of Coin and places it at a random coordinate
  */
     constructor() {
-        super().loadImage('img/8_coin/coin_1.png');
+        super().loadImage('assets/img/8_coin/coin_1.png');
         this.x = 400 + Math.random() * 1800;
         this.y = 310 - Math.random() * 240;
     }

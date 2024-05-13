@@ -8,7 +8,7 @@ class Cloud extends MovableObject {
  * Creates an instance of Cloud and places it at a random coordinate
  */
     constructor() {
-        super().loadImage('img/5_background/layers/4_clouds/1.png');
+        super().loadImage('assets/img/5_background/layers/4_clouds/1.png');
         this.x = Math.random() * 2700;
         this.animate();
     }
