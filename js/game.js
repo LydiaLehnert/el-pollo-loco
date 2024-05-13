@@ -24,12 +24,10 @@ function startGame() {
     let startScreen = document.getElementById('start_screen');
     let startButton = document.getElementById('start_button');
 
-    
     init();
     startScreen.remove();
     startButton.remove();
     playAudio(world.SOUND_BACKGROUND);
-
 }
 
 /**
@@ -47,11 +45,9 @@ function turnVolumeOff() {
     if (isMobile) {
         volumeOnIconScreenview.style.zIndex = -1;
         volumeOffIconScreenview.style.zIndex = 1;
-        console.log('volumeOffScreenview');
     } else {
         volumeOnButtonMobileDesign.style.zIndex = -1;
         volumeOffButtonMobileDesign.style.zIndex = 1;
-        console.log('volumeOffResponsive');
     }
     audioOn = false;
     world.SOUND_BACKGROUND.pause();
@@ -72,7 +68,7 @@ function turnVolumeOn() {
     if (isMobile) {
         volumeOffIconScreenview.style.zIndex = -1;
         volumeOnIconScreenview.style.zIndex = 1;
-    } {
+    } else {
         volumeOffButtonMobileDesign.style.zIndex = -1;
         volumeOnButtonMobileDesign.style.zIndex = 1;
     }

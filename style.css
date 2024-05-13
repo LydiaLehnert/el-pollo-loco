@@ -85,6 +85,74 @@ canvas {
 }
 
 /* =========
+KEY INSTRUCTIONS
+============*/
+
+.key-instructions-container {
+    display: flex;
+    gap: 64px;
+    margin-top: 48px;
+}
+
+.key-instruction {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 18px;
+}
+
+.key-instruction-icon {
+    height: 40px;
+    width: 40px;
+    border-style: double;
+    border-radius: 4px;
+    text-align: center;
+    margin: 8px;
+    background-color: rgb(107, 190, 216);
+        display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.key-instruction-icon-jump {
+    width: 70px;
+}
+
+/*=====
+IMPRINT
+=======*/
+
+.imprint-link-container {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 100vw;
+    display: flex;
+    justify-content: flex-end;
+    padding: 32px;
+    font-size: 18px;
+}
+
+.imprint-link {
+    color: black;
+    text-decoration: none;
+}
+
+.imprint-link:hover {
+    color: rgb(160, 34, 10);
+}
+
+h2 {
+    font-size: 32px;
+    letter-spacing: 1px;
+    color: rgb(160, 34, 10);
+}
+
+.imprint-container {
+    font-size: 20px;
+}
+
+/* =========
 SMALL SCREEN
 ============*/
 
@@ -180,28 +248,6 @@ END SCREEN
 }
 
 /* ================
-IMPRESSUM
-===================*/
-.imprint-link {
-    color: black;
-    text-decoration: none;
-}
-
-.imprint-link:hover {
-    color: rgb(160, 34, 10);
-}
-
-h2 {
-    font-size: 32px;
-    letter-spacing: 1px;
-    color: rgb(160, 34, 10);
-}
-
-.imprint-container {
-    font-size: 20px;
-}
-
-/* ================
 RESPONSIVE-DESIGN
 ===================*/
 
@@ -245,15 +291,16 @@ RESPONSIVE-DESIGN
     #start_button,
     canvas,
     .volume-icon,
+    .key-instructions-container,
     #endscreen_img,
     #endscreen_text_won,
     #endscreen_text_lost {
         display: none;
     }
-}
 
-.imprint-container {
-    margin-left: 32px;
+    .imprint-container {
+        margin-left: 32px;
+    }
 }
 
 /* Break point 3 (max-height: 600px)*/
@@ -268,10 +315,11 @@ RESPONSIVE-DESIGN
     .mobile-touch-button-container {
         height: 100vh;
         width: 100%;
-        /* object-fit: contain; */
     }
 
-    h1 {
+    h1,
+    .imprint-link,
+    .key-instructions-container {
         display: none;
     }
 

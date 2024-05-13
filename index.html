@@ -36,10 +36,11 @@
     <h1>El Pollo Loco</h1>
     <div id="canvas_container" class="canvas-container">
         <img id="start_screen" src="assets/img/9_intro_outro_screens/start/startscreen_1.png">
-        <img id="start_button" onclick="startGame()" src="assets/img/9_intro_outro_screens/start/play_arrow4.svg"> <canvas
-            id="canvas" width="720" height="480"></canvas>
-            <img onclick="turnVolumeOff()" id="volume_on_icon" class="volume-icon" src="assets/icons/volume-on.svg">
-            <img onclick="turnVolumeOn()" id="volume_off_icon" class="volume-icon" src="assets/icons/volume-off.svg">
+        <img id="start_button" onclick="startGame()" src="assets/img/9_intro_outro_screens/start/play_arrow4.svg">
+        <canvas id="canvas" width="720" height="480"></canvas>
+        <img onclick="turnVolumeOff()" id="volume_on_icon" class="volume-icon" src="assets/icons/volume-on.svg">
+        <img onclick="turnVolumeOn()" id="volume_off_icon" class="volume-icon" src="assets/icons/volume-off.svg">
+
         <div class="mobile-touch-button-container">
             <div class="mobile-touch-buttons-bottom">
                 <div>
@@ -66,7 +67,29 @@
             <span id="turn_device_message">Turn your device to play</span>
         </div>
     </div>
-    <a href="impressum.html" class = "imprint-link">Impressum</a>
+
+    <div class="key-instructions-container">
+        <div class="key-instruction">
+            <img src="assets/icons/big-arrow-left.svg" class="key-instruction-icon">
+            <span>move left</span>
+        </div>
+        <div class="key-instruction">
+            <img src="assets/icons/big-arrow-right.svg" class="key-instruction-icon">
+            <span>move right</span>
+        </div>
+        <div class="key-instruction">
+            <span class="key-instruction-icon key-instruction-icon-jump">SPACE</span>
+            <span>jump</span>
+        </div>
+        <div class="key-instruction">
+            <span class="key-instruction-icon">D</span>
+            <span>throw bottle</span>
+        </div>
+    </div>
+    <div class="imprint-link-container">
+        <a href="imprint.html" class="imprint-link">Impressum</a>
+    </div>
+
 </body>
 
 </html>
