@@ -11,6 +11,9 @@ class StatusBarEndboss extends StatusBar {
         'img/7_statusbars/2_statusbar_endboss/green/green100.png'
     ];
 
+    /**
+     * Creates a new instance of statur-bar-bottles, loads necessary images and sets percentage to zero
+     */
     constructor() {
         super();
         this.loadImages(this.IMAGES);

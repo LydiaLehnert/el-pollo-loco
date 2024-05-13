@@ -1,5 +1,5 @@
 class StatusBarEnergy extends StatusBar {
-    y = 95; 
+    y = 95;
     percentage = 100;
     IMAGES = [
         'img/7_statusbars/1_statusbar/2_statusbar_health/green/0.png',
@@ -10,13 +10,20 @@ class StatusBarEnergy extends StatusBar {
         'img/7_statusbars/1_statusbar/2_statusbar_health/green/100.png'
     ];
 
+    /**
+     * Creates a new instance of statur-bar-bottles, loads necessary images and sets percentage to zero
+     */
     constructor() {
         super();
-        this.loadImages(this.IMAGES);     
+        this.loadImages(this.IMAGES);
         this.setPercentage(100);
     }
 
-    resolveImageIndex() {            
+     /**
+     * Determines the image index based on the percentage completion
+     * @returns the index of the image to be displayed based on the completion percentage
+     */
+    resolveImageIndex() {
         if (this.percentage == 100) {
             return 5;
         } else if (this.percentage > 80) {

@@ -3,9 +3,13 @@ class Level {
     endboss;
     clouds;
     bottles;
-    coins;
+    coins;2
     backgroundObjects;
     level_end_x = 2200; 
+
+    /**
+     * Constructs a new instance of the game environment
+     */
 
     constructor(enemies, endboss, clouds, bottles, coins, backgroundObjects) {
         this.enemies = enemies;

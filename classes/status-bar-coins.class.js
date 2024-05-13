@@ -10,6 +10,9 @@ class StatusBarCoins extends StatusBar {
         'img/7_statusbars/1_statusbar/1_statusbar_coin/green/100.png'
     ];
 
+    /**
+     * Creates a new instance of statur-bar-bottles, loads necessary images and sets percentage to zero
+     */
     constructor() {
         super(); 
         this.loadImages(this.IMAGES);

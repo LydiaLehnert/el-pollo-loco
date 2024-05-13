@@ -4,12 +4,17 @@ class Keyboard {
     SPACE = false;
     D = false;
 
-
+    /* 
+     * Binds button key events and touch events
+     */
     constructor() {
         this.bindButtonKeyEvents();
         this.bindButtonTouchEvents();
     }
 
+    /**
+     * Event listener for keydown event to handle character movement
+     */
     bindButtonKeyEvents() {
         window.addEventListener("keydown", (event) => {
             if (event.keyCode == 39) {
@@ -29,7 +34,9 @@ class Keyboard {
             }
         });
 
-
+    /**
+     * Event listener for keyup event to handle character movement
+     */
         window.addEventListener("keyup", (event) => {
             if (event.keyCode == 39) {
                 this.RIGHT = false;
@@ -49,6 +56,9 @@ class Keyboard {
         });
     }
 
+    /**
+     * Binds touch events to on-screen buttons for controlling character movement
+     */
     bindButtonTouchEvents() {
         let buttonLeft = document.getElementById('button_left');
         let buttonRight = document.getElementById('button_right');

@@ -9,6 +9,9 @@ class ThrowableObject extends MovableObject {
         'img/6_salsa_bottle/bottle_rotation/4_bottle_rotation.png',
     ]
 
+    /**
+    * Creates a new instance of ThrowableObject and loads necessary images
+    */
     constructor(x, y) {
         super().loadImage('img/6_salsa_bottle/1_salsa_bottle_on_ground.png');
         this.loadImages(this.IMAGES_BOTTLE_ROTATION);
@@ -19,6 +22,10 @@ class ThrowableObject extends MovableObject {
         this.throwObject();
     }
 
+    /**
+     *  Initiates the throwing action for the object
+     *  Sets vertical speed, applies gravity, plays the throw sound, determines the direction of the throw, and initiates animation
+     */
     throwObject() {
         this.speedY = 30;
         this.applyGravity();
@@ -29,27 +36,37 @@ class ThrowableObject extends MovableObject {
         this.animate();
     }
 
+    /**
+     *  Initiates the throwing action to the right
+     *  Moves the object horizontally to the right at a constant speed
+     */
     throwRight() {
         this.interval = setStoppableInterval(() => {
-            // TODO Make sure that discard() is called when bottle hits floor or is not in view anymore
             this.x += 7;
         }, 25);
     }
 
+    /**
+     *  Initiates the throwing action to the left
+     *  Moves the object horizontally to the left at a constant speed
+     */
     throwLeft() {
         this.interval = setStoppableInterval(() => {
-            // TODO Make sure that discard() is called when bottle hits floor or is not in view anymore
             this.x -= 7;
-
         }, 25);
-
     }
 
+    /**
+     * * Initiates animation by playing the rotation animation for the object
+     */
     animate() {
         this.playAnimation(this.IMAGES_BOTTLE_ROTATION);
     }
 
-    discard() {
+    /**
+     * Stops the interval if it is running
+     */
+    stopInterval() {
         if (this.interval) {
             clearInterval(this.interval);
         }

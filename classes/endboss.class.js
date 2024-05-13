@@ -1,8 +1,6 @@
 class Endboss extends MovableObject {
-    scaleFactorX = 0.9;
     y = 55;
     x = 100;
-    scaleFactorY = 0.8;
     width = 250;
     height = 400;
     speed = 10;
@@ -57,6 +55,9 @@ class Endboss extends MovableObject {
         'img/4_enemie_boss_chicken/5_dead/G26.png'
     ];
 
+    /**
+     * Creates a new instance of Endboss and loads necessary images
+     */
     constructor() {
         super().loadImage(this.IMAGES_ALERT[0]);
         this.loadImages(this.IMAGES_ALERT);
@@ -69,11 +70,18 @@ class Endboss extends MovableObject {
         this.i = 0;
     }
 
+    /**
+       * Initiates animations by setting up stoppable intervals for moving and playing the endboss
+       */
     animate() {
         setStoppableInterval(() => this.moveEndboss(), 300);
         setStoppableInterval(() => this.playEndboss(), 150);
     }
 
+    /**
+     * Checks if the end boss character encounters the main character for the first time
+     * if true,  the 'alert' animation of the endboss is played and after it the end battle starts
+     *  */
     moveEndboss() {
         if (this.encountersCharacterForTheFirstTime()) {
             if (i < 8) {
@@ -87,10 +95,18 @@ class Endboss extends MovableObject {
         }
     }
 
+    /**
+     * Checks if the end boss character encounters the main character for the first time
+     * @returns true if the X-coordinate of the character is greater than 2129 and endboss did not not have first contact to character
+     */
     encountersCharacterForTheFirstTime() {
-         return world.character.x > 2129 && !this.hadFirstContact;
+        return world.character.x > 2129 && !this.hadFirstContact;
     }
 
+    /**
+     * plays the walking animation and initiates leftward movement for the endboss
+     * also pauses the background sound and plays the end battle sound
+     */
     startEndbattle() {
         this.playAnimation(this.IMAGES_WALKING);
         this.moveLeft();
@@ -98,6 +114,9 @@ class Endboss extends MovableObject {
         playAudio(this.SOUND_ENDBATTLE);
     }
 
+    /**
+     * Plays animations and audio for the end boss character if endboss is hurt oder attacks the character
+     */
     playEndboss() {
         if (this.isHurt()) {
             this.playAnimation(this.IMAGES_HURT);
