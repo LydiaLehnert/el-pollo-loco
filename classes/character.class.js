@@ -2,7 +2,7 @@ class Character extends MovableObject {
     y = 180;
     width = 150;
     height = 250;
-    speed = 2;       
+    speed = 10; //change to 2      
     world;
     lastAction = new Date();
     offset = {
@@ -129,7 +129,9 @@ class Character extends MovableObject {
         this.lastAction = new Date();
         super.moveRight();
         this.direction = "right";
-        playAudio(this.SOUND_WALKING);
+        if (!this.isAboveGround) {
+            playAudio(this.SOUND_WALKING)
+        };
     }
 
     /**
@@ -148,7 +150,9 @@ class Character extends MovableObject {
         this.lastAction = new Date();
         super.moveLeft();
         this.direction = "left";
-        playAudio(this.SOUND_WALKING);
+        if (!this.isAboveGround) {
+            playAudio(this.SOUND_WALKING)
+        };
     }
 
     /**
@@ -180,10 +184,10 @@ class Character extends MovableObject {
         } else if (this.isLongIdling()) {
             this.playAnimation(this.IMAGES_LONG_IDLE);
             playAudio(this.SOUND_SNORING);
-        } else if (this.isWalking()) {
-            this.playAnimation(this.IMAGES_WALKING);
         } else if (this.isAboveGround()) {
             this.playAnimation(this.IMAGES_JUMPING);
+        } else if (this.isWalking()) {
+            this.playAnimation(this.IMAGES_WALKING);
         } else {
             this.playAnimation(this.IMAGES_IDLE);
         }
@@ -209,7 +213,7 @@ class Character extends MovableObject {
      * Increases the property collectedBottles by 10 in class World and plays the audio 'collect bottle'
      */
     collectBottle() {
-        world.collectedBottles += 10;
+        world.collectedBottles += 20;
         playAudio(this.SOUND_COLLECT_BOTTLE);
     };
 

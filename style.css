@@ -152,6 +152,29 @@ h2 {
     font-size: 20px;
 }
 
+.back-icon-container {
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    display: flex;
+    justify-content: flex-start;
+    padding-left: 32px;
+    padding-top: 32px;
+}
+
+.back-icon {
+    width: 32px;
+    background-color: rgb(244,166,133);
+    border-radius: 100%;
+    border-style: double;
+    margin: 8px;
+}
+
+.back-icon:hover {
+    cursor: pointer;   
+    filter: opacity(0.6);
+}
+
 /* =========
 SMALL SCREEN
 ============*/
@@ -189,7 +212,7 @@ MOBILE TOUCH BUTTONS
     border-radius: 100%;
     border-style: double;
     margin: 8px;
-    /* display: none;  */
+    display: none; 
 }
 
 .volume-button {

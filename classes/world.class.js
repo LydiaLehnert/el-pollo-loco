@@ -60,7 +60,7 @@ class World {
      */
     checkCollisions() {
         if (this.character.isColliding(this.level.endboss)) {
-            this.character.hit(0.6);
+            this.character.hit(1);
             this.statusBarEnergy.setPercentage(this.character.energy);
         }
 
@@ -117,7 +117,7 @@ class World {
      */
     updatethrowableObjectsAndBottles(bottle) {
         this.throwableObjects.push(bottle);
-        this.collectedBottles -= 10;
+        this.collectedBottles -= 20;
         this.statusBarBottles.setPercentage(this.collectedBottles);
     }
 
@@ -202,12 +202,11 @@ class World {
      */
     draw() {
         this.clearAndSetupCanvas();
-        this.addCharacterAndLandscape();
-        this.drawFixedElements();
+        this.addLandscape();
         this.addCollectableObjectsAndEnemies();
-
+        this.drawFixedElements();
+        this.addToMap(this.character);
         this.resetCanvasTranslation();
-
         let self = this;
         requestAnimationFrame(function () {
             self.draw();
@@ -225,9 +224,8 @@ class World {
     /**
      *  Adds character and landscape elements to the game map
      */
-    addCharacterAndLandscape() {
+    addLandscape() {
         this.addObjectsToMap(this.level.backgroundObjects);
-        this.addToMap(this.character);
         this.addObjectsToMap(this.level.clouds);
     }
 

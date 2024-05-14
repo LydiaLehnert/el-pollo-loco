@@ -1,15 +1,15 @@
 class Endboss extends MovableObject {
-    y = 55;
-    x = 100;
+    y = 55;                    
+    x = 2700;    
     width = 250;
     height = 400;
-    speed = 25;
+    speed = 25;     
     hadFirstContact = false;
     offset = {
         top: 75,
-        left: 8,
+        left: 35,
         right: 10,
-        bottom: 12
+        bottom: 100
     };
     SOUND_ENDBATTLE = new Audio('assets/audio/endbattle.mp3');
     SOUND_IF_HIT = new Audio('assets/audio/chicken.mp3');
@@ -65,7 +65,6 @@ class Endboss extends MovableObject {
         this.loadImages(this.IMAGES_ATTACK);
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
-        this.x = 2700;
         this.animate();
         this.i = 0;
     }
