@@ -17,7 +17,7 @@ class Cloud extends MovableObject {
  * Initiates an animation by periodically invoking the moveLeft function
  */
     animate() {
-        setInterval(() => {
+        setStoppableInterval(() => {
             this.moveLeft()
         }, 1000 / 60);
     }

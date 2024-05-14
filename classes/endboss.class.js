@@ -3,7 +3,8 @@ class Endboss extends MovableObject {
     x = 2700;    
     width = 250;
     height = 400;
-    speed = 25;     
+    speed = 25;
+    numberOfAnimationsBeforeFirstContact = 0;
     hadFirstContact = false;
     offset = {
         top: 75,
@@ -66,7 +67,6 @@ class Endboss extends MovableObject {
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
         this.animate();
-        this.i = 0;
     }
 
     /**
@@ -83,9 +83,9 @@ class Endboss extends MovableObject {
      *  */
     moveEndboss() {
         if (this.encountersCharacterForTheFirstTime()) {
-            if (i < 8) {
+            if (this.numberOfAnimationsBeforeFirstContact < 8) {
                 this.playAnimation(this.IMAGES_ALERT);
-                i++;
+                this.numberOfAnimationsBeforeFirstContact++;
             } else {
                 this.hadFirstContact = true;
             }

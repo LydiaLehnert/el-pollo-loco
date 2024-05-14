@@ -2,8 +2,8 @@ let canvas;
 let world;
 
 let intervalIds = [];
-let i = 1;
-let audioElements = [];
+//let i = 1;
+//let audioElements = [];
 let audioOn = true;
 let gameRestarted = false;
 
@@ -112,6 +112,7 @@ function restartGame() {
     removeEndscreen();
     init();
     playAudio(world.SOUND_BACKGROUND);
+    setTimeout(() => gameRestarted = false, 6500);
 }
 
 /**
@@ -151,6 +152,7 @@ function removeEndscreen() {
 function endGame(outcomeOfGame) {
     let canvasContainer = document.getElementById('canvas_container');
     intervalIds.forEach(clearInterval);
+    intervalIds = [];
     stopGameAudio();
     const deadAnimationCharacter = world.character.playDeadAnimation();
     const deadAnimationEndboss = world.level.endboss.playDeadAnimation();
@@ -172,6 +174,7 @@ function endGame(outcomeOfGame) {
 function stopGameAudio() {
     world.character.SOUND_WALKING.pause();
     world.level.endboss.SOUND_ENDBATTLE.pause();
+    world.SOUND_BACKGROUND.pause();
 }
 
 /**

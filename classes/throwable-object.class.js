@@ -1,5 +1,6 @@
 class ThrowableObject extends MovableObject {
-    interval = null;
+    throwInterval = null;
+    animationInterval = null;
     SOUND_THROW = new Audio('assets/audio/throw-bottle.mp3');
 
     IMAGES_BOTTLE_ROTATION = [
@@ -50,7 +51,7 @@ class ThrowableObject extends MovableObject {
      *  Moves the object horizontally to the right at a constant speed
      */
     throwRight() {
-        this.interval = setStoppableInterval(() => {
+        this.throwInterval = setStoppableInterval(() => {
             this.x += 7;
         }, 25);
     }
@@ -60,7 +61,7 @@ class ThrowableObject extends MovableObject {
      *  Moves the object horizontally to the left at a constant speed
      */
     throwLeft() {
-        this.interval = setStoppableInterval(() => {
+        this.throwInterval = setStoppableInterval(() => {
             this.x -= 7;
         }, 25);
     }
@@ -69,7 +70,7 @@ class ThrowableObject extends MovableObject {
      * * Initiates animation by playing the rotation animation for the object
      */
     animate() {
-        setInterval(() => {
+        this.animate = setStoppableInterval(() => {
             this.playAnimation(this.IMAGES_BOTTLE_ROTATION);
         }, 1000 / 60);
     }
@@ -78,8 +79,11 @@ class ThrowableObject extends MovableObject {
      * Stops the interval if it is running
      */
     stopInterval() {
-        if (this.interval) {
-            clearInterval(this.interval);
+        if (this.throwInterval) {
+            clearInterval(this.throwInterval);
+        }
+        if(this.animationInterval) {
+            clearInterval(this.animationInterval);
         }
     }
 }
