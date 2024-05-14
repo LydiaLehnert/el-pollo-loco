@@ -2,13 +2,13 @@ class StatusBar extends DrawableObject {
     x = 40;
     width = 200;
     height = 60;
-    img; 
+    img;
     percentage;
 
-/**
- * Sets the completion percentage and updates the displayed image accordingly
- * @param {number} percentage The completion percentage to set.
- */
+    /**
+     * Sets the completion percentage and updates the displayed image accordingly
+     * @param {number} percentage The completion percentage to set.
+     */
     setPercentage(percentage) {
         this.percentage = percentage;
         let path = this.IMAGES[this.resolveImageIndex()];
@@ -19,7 +19,7 @@ class StatusBar extends DrawableObject {
      * Determines the image index based on the percentage completion
      * @returns the index of the image to be displayed based on the completion percentage
      */
-    resolveImageIndex() {            
+    resolveImageIndex() {
         if (this.percentage >= 100) {
             return 5;
         } else if (this.percentage >= 80) {

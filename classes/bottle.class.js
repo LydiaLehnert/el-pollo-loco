@@ -7,6 +7,7 @@ class Bottle extends DrawableObject {
         right: 10,
         bottom: 7
     };
+    
 /**
  *  Creates an instance of Bottle and places it at a random coordinate
  */

@@ -91,7 +91,7 @@ KEY INSTRUCTIONS
 .key-instructions-container {
     display: flex;
     gap: 64px;
-    margin-top: 48px;
+    margin-top: 32px;
 }
 
 .key-instruction {
@@ -213,6 +213,9 @@ END SCREEN
     width: 720px;
     height: 480px;
     position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     z-index: 2;
 }
 
@@ -292,6 +295,7 @@ RESPONSIVE-DESIGN
     canvas,
     .volume-icon,
     .key-instructions-container,
+    .imprint-link-container,
     #endscreen_img,
     #endscreen_text_won,
     #endscreen_text_lost {
@@ -318,7 +322,7 @@ RESPONSIVE-DESIGN
     }
 
     h1,
-    .imprint-link,
+    .imprint-link-container,
     .key-instructions-container {
         display: none;
     }

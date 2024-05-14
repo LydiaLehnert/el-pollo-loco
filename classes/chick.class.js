@@ -3,7 +3,7 @@ class Chick extends Chicken {
     y = 378;
     width = 40;
     height = 35;
-    speed = 0.15 + Math.random() * 0.25;
+    speed = 0.3 + Math.random() * 0.25;
     offset = {
         top: 3,
         left: 5,

@@ -2,7 +2,7 @@ class Character extends MovableObject {
     y = 180;
     width = 150;
     height = 250;
-    speed = 10;                 // for testing: change to 2
+    speed = 2;       
     world;
     lastAction = new Date();
     offset = {
@@ -158,6 +158,7 @@ class Character extends MovableObject {
     canJump() {
         return this.world.keyboard.SPACE && !this.isAboveGround();
     }
+
     /**
     * Updates the last action timestamp, triggers the character's jump animation, sets the vertical speed and plays the jump sound
      */
@@ -187,6 +188,7 @@ class Character extends MovableObject {
             this.playAnimation(this.IMAGES_IDLE);
         }
     }
+
     /**
      * Checks if the character has been inactive for more than 10 seconds
      * @returns true if the character's last action was more than 10 seconds ago
@@ -210,9 +212,10 @@ class Character extends MovableObject {
         world.collectedBottles += 10;
         playAudio(this.SOUND_COLLECT_BOTTLE);
     };
-/**
- * Increases the property collectedCoins by 20 in class World and plays the audio 'collect coin'
- */
+
+    /**
+     * Increases the property collectedCoins by 20 in class World and plays the audio 'collect coin'
+     */
     collectCoin() {
         world.collectedCoins += 20;
         playAudio(this.SOUND_COLLECT_COIN);

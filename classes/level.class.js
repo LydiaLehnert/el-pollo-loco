@@ -10,7 +10,6 @@ class Level {
     /**
      * Constructs a new instance of the game environment
      */
-
     constructor(enemies, endboss, clouds, bottles, coins, backgroundObjects) {
         this.enemies = enemies;
         this.endboss = endboss;

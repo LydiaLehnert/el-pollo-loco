@@ -1,15 +1,19 @@
 const createLevel1 = () => new Level(
     [
-        new Chicken(),
-        new Chicken(),
-        new Chicken(),
-        new Chicken(),
-        new Chicken(),
-        new Chicken(),
-        new Chick(),
-        new Chick(),
-        new Chick(),
-        new Chick()
+        // new Chicken(),
+        // new Chicken(),
+        // new Chicken(),
+        // new Chicken(),
+        // new Chicken(),
+        // new Chicken(),
+        // new Chicken(),
+        // new Chicken(),
+        // new Chick(),
+        // new Chick(),
+        // new Chick(),
+        // new Chick(),
+        // new Chick(),
+        // new Chick()
     ],
     new Endboss(),
     [
@@ -25,11 +29,6 @@ const createLevel1 = () => new Level(
         new Cloud()
     ],
     [
-        new Bottle(),
-        new Bottle(),
-        new Bottle(),
-        new Bottle(),
-        new Bottle(),
         new Bottle(),
         new Bottle(),
         new Bottle(),

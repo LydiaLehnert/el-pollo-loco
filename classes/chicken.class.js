@@ -27,10 +27,10 @@ class Chicken extends MovableObject {
         this.animate();
     }
 
-/**
- * Calls function moveLeft (at an interval of 1000/60ms) and plays death animation and the audio 'is hit' when the chicken is dead,
- *  and stops the walking interval; else plays animation 'images walking' (at an interval of 200ms)
- */
+    /**
+     * Calls function moveLeft (at an interval of 1000/60ms) and plays death animation and the audio 'is hit' when the chicken is dead,
+     *  and stops the walking interval; else plays animation 'images walking' (at an interval of 200ms)
+     */
     animate() {
         this.chickenWalkingInterval = setStoppableInterval(() => {
             this.moveLeft();

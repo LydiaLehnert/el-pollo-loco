@@ -90,30 +90,30 @@ class MovableObject extends DrawableObject {
         this.currentImage++;
     }
 
-/**
- * Moves the object to the right by adding its current speed to its horizontal position
- */
+    /**
+     * Moves the object to the right by adding its current speed to its horizontal position
+     */
     moveRight() {
         this.x += this.speed;
     }
-/**
- * Moves the object to the left by subtracting its current speed from its horizontal position
- */
+    /**
+     * Moves the object to the left by subtracting its current speed from its horizontal position
+     */
     moveLeft() {
         this.x -= this.speed;
     }
 
-/**
- * Sets the vertical speed of the object to 30, initiating a jump action
- */
+    /**
+     * Sets the vertical speed of the object to 30, initiating a jump action
+     */
     jump() {
         this.speedY = 30;
     }
 
     /**
-     * plays the dead animation if the object is dead
-     * It sets an interval to continuously play the dead animation
-     * @returns the animation intervall if true; returns null, if false
+    * plays the dead animation if the object is dead 
+    * It sets an interval to continuously play the dead animation
+    * @returns the animation intervall if true; returns null, if false
      */
     playDeadAnimation() {
         if (this.isDead()) {

@@ -85,11 +85,12 @@ class DrawableObject {
             ctx.stroke();
         }
     }
-/**
- * Calculates whether two objects are colliding based on their positions and dimensions 
- * @param {object} drawableObject The other object to check for collision with
- * @returns true if object is colliding with the other object
- */
+    
+    /**
+     * Calculates whether two objects are colliding based on their positions and dimensions 
+     * @param {object} drawableObject The other object to check for collision with
+     * @returns true if object is colliding with the other object
+     */
     isColliding(drawableObject) {
         return (
             this.x + this.width - this.offset.right > drawableObject.x + drawableObject.offset.left &&
