@@ -24,7 +24,7 @@ class ThrowableObject extends MovableObject {
     constructor(x, y) {
         super().loadImage('assets/img/6_salsa_bottle/1_salsa_bottle_on_ground.png');
         this.loadImages(this.IMAGES_BOTTLE_ROTATION);
-        this.loadImages(this.IMAGES_BOTTLE_ROTATION);
+        this.loadImages(this.IMAGES_BOTTLE_SPLASH);
         this.x = x;
         this.y = y;
         this.width = 50;
@@ -82,8 +82,10 @@ class ThrowableObject extends MovableObject {
         if (this.throwInterval) {
             clearInterval(this.throwInterval);
         }
-        if(this.animationInterval) {
+        setTimeout(() => {
             clearInterval(this.animationInterval);
-        }
+            this.discarded = true;
+
+        }, 2000);
     }
 }

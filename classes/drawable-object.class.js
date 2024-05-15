@@ -12,6 +12,7 @@ class DrawableObject {
         right: 0,
         bottom: 0
     };
+    discarded = false;
 
     /**
      * Loads an image from the specified path

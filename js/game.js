@@ -2,8 +2,6 @@ let canvas;
 let world;
 
 let intervalIds = [];
-//let i = 1;
-//let audioElements = [];
 let audioOn = true;
 let gameRestarted = false;
 

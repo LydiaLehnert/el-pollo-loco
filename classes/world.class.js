@@ -149,11 +149,13 @@ class World {
      * Checks if the character has jumped on any enemy, and if so, deals damage to the enemy
      */
     checkJumpingOnEnemy() {
-        this.level.enemies.forEach((enemy) => {
+        for(let i = 0; i < this.level.enemies.length; i++) {
+            const enemy = this.level.enemies[i];
             if (this.character.jumpedOnEnemy(enemy)) {
                 enemy.hit(100);
+                return;
             }
-        });
+        }
     }
 
     /**
@@ -165,7 +167,7 @@ class World {
         this.level.coins.forEach((coin, indexOfCoins) => {
             if (this.character.isColliding(coin)) {
                 this.character.collectCoin();
-                this.level.coins.splice(indexOfCoins, 1);
+                coin.discarded = true;
                 this.statusBarCoins.setPercentage(this.collectedCoins);
             }
         });
@@ -180,7 +182,7 @@ class World {
         this.level.bottles.forEach((bottle, indexOfBottles) => {
             if (this.character.isColliding(bottle)) {
                 this.character.collectBottle();
-                this.level.bottles.splice(indexOfBottles, 1);
+                bottle.discarded = true;
                 this.statusBarBottles.setPercentage(this.collectedBottles);
             }
         });
@@ -251,11 +253,28 @@ class World {
    *  Adds collectable objects and enemies to the game map
    */
     addCollectableObjectsAndEnemies() {
+        this.removeDiscardedObjects(this.throwableObjects);
         this.addObjectsToMap(this.throwableObjects);
+        this.removeDiscardedObjects(this.level.bottles);
         this.addObjectsToMap(this.level.bottles);
+        this.removeDiscardedObjects(this.level.coins);
         this.addObjectsToMap(this.level.coins);
+        this.removeDiscardedObjects(this.level.enemies);
         this.addObjectsToMap(this.level.enemies);
         this.addToMap(this.level.endboss);
+    }
+
+    /**
+     * Removes any objects that have been discarded from the current game
+     * @param {Remo} objects 
+     */
+    removeDiscardedObjects(objects) {
+        objects.forEach(object => {
+            if(object.discarded) {
+                objects.splice(objects.indexOf(object), 1);
+            }
+        })
+
     }
 
     /**
