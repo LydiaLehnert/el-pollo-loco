@@ -1,4 +1,5 @@
 class ThrowableObject extends MovableObject {
+    isShattered = false;
     throwInterval = null;
     animationInterval = null;
     SOUND_THROW = new Audio('assets/audio/throw-bottle.mp3');
@@ -29,6 +30,7 @@ class ThrowableObject extends MovableObject {
         this.y = y;
         this.width = 50;
         this.height = 60;
+        this.moveByX = (world.character.direction === "right") ? +7 : -7;
         this.throwObject();
     }
 
@@ -37,48 +39,64 @@ class ThrowableObject extends MovableObject {
      *  Sets vertical speed, applies gravity, plays the throw sound, determines the direction of the throw, and initiates animation
      */
     throwObject() {
-        this.speedY = 30;
+        this.speedY = 25;
         this.applyGravity();
         playAudio(this.SOUND_THROW);
-        if (world.character.direction === "right") {
-            this.throwRight();
-        } else { this.throwLeft() }
-        this.animate();
+        this.animateBottleRotation();
+
+        this.throwInterval = setStoppableInterval(() => {
+            if (this.isFallenOnGround()) {
+                this.shatterBottle();
+            } else {
+                this.x += this.moveByX;
+            }
+        }, 1000 / 60);
     }
 
     /**
-     *  Initiates the throwing action to the right
-     *  Moves the object horizontally to the right at a constant speed
+     * Checks if throwableObject is fallen on ground
+     * @returns true if y-coordinate is greater than 390 (the lowest point on the Y-coordinate bottles are placed)
      */
-    throwRight() {
-        this.throwInterval = setStoppableInterval(() => {
-            this.x += 7;
-        }, 25);
+    isFallenOnGround() {
+        return this.y > 390;
     }
 
     /**
-     *  Initiates the throwing action to the left
-     *  Moves the object horizontally to the left at a constant speed
-     */
-    throwLeft() {
-        this.throwInterval = setStoppableInterval(() => {
-            this.x -= 7;
-        }, 25);
+     * Stops the rotation animation of the bottle, plays the splash animation, sets the vertical velocity to zero and removes the bottle
+     * from the canvas after 500ms
+     */ 
+    shatterBottle() {
+        this.isShattered = true;
+        this.stopRotationAnimation();
+        this.stopThrowInterval();
+        this.speedY = 0;
+        this.animationInterval = setStoppableInterval(() => {
+            this.playAnimation(this.IMAGES_BOTTLE_SPLASH);
+        }, 1000 / 60);
     }
 
     /**
      * * Initiates animation by playing the rotation animation for the object
      */
-    animate() {
-        this.animate = setStoppableInterval(() => {
+    animateBottleRotation() {
+        this.animationInterval = setStoppableInterval(() => {
             this.playAnimation(this.IMAGES_BOTTLE_ROTATION);
         }, 1000 / 60);
     }
 
     /**
-     * Stops the interval if it is running
+     * Stops the animation interval if it is running
      */
-    stopInterval() {
+    stopRotationAnimation() {
+        if (this.animationInterval) {
+            clearInterval(this.animationInterval);
+        }
+    }
+
+    /**
+     * Stops the throw interval if it is running
+     */
+    stopThrowInterval() {
         if (this.throwInterval) {
             clearInterval(this.throwInterval);
         }

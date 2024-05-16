@@ -151,6 +151,7 @@ function endGame(outcomeOfGame) {
     let canvasContainer = document.getElementById('canvas_container');
     intervalIds.forEach(clearInterval);
     intervalIds = [];
+    world.cancelAnimationFrame()
     stopGameAudio();
     const deadAnimationCharacter = world.character.playDeadAnimation();
     const deadAnimationEndboss = world.level.endboss.playDeadAnimation();

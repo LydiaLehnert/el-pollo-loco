@@ -2,7 +2,7 @@ class Character extends MovableObject {
     y = 180;
     width = 150;
     height = 250;
-    speed = 10; //change to 2      
+    speed = 4;
     world;
     lastAction = new Date();
     offset = {

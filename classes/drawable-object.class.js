@@ -42,50 +42,6 @@ class DrawableObject {
     draw(ctx) {
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     }
-
-    /**
-     * Draws a big frame around instances of classes that can collide or be collected to check collisions of character, 
-     * chickens, chicks, endboss and throwableObjects and collision of coins and bottles
-     * @param {CanvasRenderingContext2D} ctx - The canvas rendering context to draw on
-     */
-    drawBigFrameForAllClasses(ctx) {
-        if (this instanceof Character
-            || this instanceof Chicken
-            || this instanceof Chick
-            || this instanceof Endboss
-            || this instanceof Coin
-            || this instanceof Bottle
-            || this instanceof ThrowableObject) {
-            ctx.beginPath();
-            ctx.lineWidth = '1';
-            ctx.strokeStyle = 'transparent';   
-            ctx.rect(this.x, this.y, this.width, this.height);
-            ctx.stroke();
-        }
-    }
-
-    /**
-     * Draws an individual frame around instances of classes that can collide or be collected by creating an offset object for each 
-     * class with the individual distances from the large frame to the respective object
-     * @param {CanvasRenderingContext2D} ctx The canvas rendering context to draw on
-     */
-    drawIndividualFrameForClass(ctx) {
-        if (this instanceof Character
-            || this instanceof Chicken
-            || this instanceof Chick
-            || this instanceof Endboss
-            || this instanceof Coin
-            || this instanceof Bottle
-            || this instanceof ThrowableObject) {
-
-            ctx.beginPath();
-            ctx.lineWidth = '1';
-            ctx.strokeStyle = 'transparent'; 
-            ctx.rect(this.x + this.offset.left, this.y + this.offset.top, (this.x + this.width - this.offset.right) -
-                (this.x + this.offset.left), (this.y + this.height - this.offset.bottom) - (this.y + this.offset.top));
-            ctx.stroke();
-        }
-    }
     
     /**
      * Calculates whether two objects are colliding based on their positions and dimensions 

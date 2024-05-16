@@ -1,6 +1,7 @@
 class World {
     character = new Character();
     level = createLevel1();
+    animationFrame;
     canvas;
     ctx;
     keyboard;
@@ -51,7 +52,7 @@ class World {
             this.checkCollectionOfCoins();
             this.checkCollectionOfBottles();
             this.checkIfGameIsOver();
-        }, 20);
+        }, 20);               
     }
 
     /**
@@ -60,7 +61,7 @@ class World {
      */
     checkCollisions() {
         if (this.character.isColliding(this.level.endboss)) {
-            this.character.hit(1);
+            this.character.hit(5);
             this.statusBarEnergy.setPercentage(this.character.energy);
         }
 
@@ -127,16 +128,18 @@ class World {
     * and updates the respective status bars
      */
     checkBottleHitsEnemies() {
-        this.throwableObjects.forEach((throwableObject, indexOfThrowableObjects) => {
+        this.throwableObjects.forEach((throwableObject) => {
+            if(throwableObject.isShattered) {
+                return;
+            }
             if (this.level.endboss.isColliding(throwableObject)) {
-                throwableObject.stopInterval();
+                throwableObject.shatterBottle();
                 this.level.endboss.hit(20);
-                this.throwableObjects.splice(indexOfThrowableObjects, 1);
                 this.statusBarEndboss.setPercentage(this.level.endboss.energy);
             } else {
                 this.level.enemies.forEach((enemy) => {
                     if (enemy.isColliding(throwableObject)) {
-                        throwableObject.stopInterval();
+                        throwableObject.shatterBottle();
                         enemy.hit(100);
                     }
                 });
@@ -149,7 +152,7 @@ class World {
      * Checks if the character has jumped on any enemy, and if so, deals damage to the enemy
      */
     checkJumpingOnEnemy() {
-        for(let i = 0; i < this.level.enemies.length; i++) {
+        for (let i = 0; i < this.level.enemies.length; i++) {
             const enemy = this.level.enemies[i];
             if (this.character.jumpedOnEnemy(enemy)) {
                 enemy.hit(100);
@@ -195,7 +198,14 @@ class World {
         if (this.character.isDead()) {
             endGame('lost');
         } else if (world.level.endboss.isDead()) {
+            
             endGame('won');
+        }
+    }
+
+    cancelAnimationFrame() {
+        if(this.animationFrame) {
+            cancelAnimationFrame(this.animationFrame);
         }
     }
 
@@ -210,7 +220,7 @@ class World {
         this.addToMap(this.character);
         this.resetCanvasTranslation();
         let self = this;
-        requestAnimationFrame(function () {
+        this.animationFrame = requestAnimationFrame(function () {
             self.draw();
         });
     }
@@ -253,8 +263,6 @@ class World {
    *  Adds collectable objects and enemies to the game map
    */
     addCollectableObjectsAndEnemies() {
-        this.removeDiscardedObjects(this.throwableObjects);
-        this.addObjectsToMap(this.throwableObjects);
         this.removeDiscardedObjects(this.level.bottles);
         this.addObjectsToMap(this.level.bottles);
         this.removeDiscardedObjects(this.level.coins);
@@ -262,6 +270,8 @@ class World {
         this.removeDiscardedObjects(this.level.enemies);
         this.addObjectsToMap(this.level.enemies);
         this.addToMap(this.level.endboss);
+        this.removeDiscardedObjects(this.throwableObjects);
+        this.addObjectsToMap(this.throwableObjects);
     }
 
     /**
@@ -295,7 +305,7 @@ class World {
     }
 
     /**
-     * Draws moveable object on the canvas context and calls methods to draw big frames and individual frames to detect collisions  
+     * Draws moveable object on the canvas context  
      * If direction is "left", it flips the image horizontally using the flipImage() method and flips the image back to its original 
      * orientation after drawing
      * @param {MovableObject} movableObject The movable object to be added to the game map
@@ -305,9 +315,6 @@ class World {
             this.flipImage(movableObject);
         }
         movableObject.draw(this.ctx);
-        movableObject.drawBigFrameForAllClasses(this.ctx);
-        movableObject.drawIndividualFrameForClass(this.ctx);
-
         if (movableObject.direction === "left") {
             this.flipImageBack(movableObject);
         }
