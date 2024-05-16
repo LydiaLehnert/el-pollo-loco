@@ -52,7 +52,7 @@ class World {
             this.checkCollectionOfCoins();
             this.checkCollectionOfBottles();
             this.checkIfGameIsOver();
-        }, 20);               
+        }, 20);
     }
 
     /**
@@ -129,7 +129,7 @@ class World {
      */
     checkBottleHitsEnemies() {
         this.throwableObjects.forEach((throwableObject) => {
-            if(throwableObject.isShattered) {
+            if (throwableObject.isShattered) {
                 return;
             }
             if (this.level.endboss.isColliding(throwableObject)) {
@@ -156,10 +156,11 @@ class World {
             const enemy = this.level.enemies[i];
             if (this.character.jumpedOnEnemy(enemy)) {
                 enemy.hit(100);
-                return;
+                // return;
             }
         }
     }
+
 
     /**
      * Checks if the character is colliding with coins 
@@ -198,13 +199,13 @@ class World {
         if (this.character.isDead()) {
             endGame('lost');
         } else if (world.level.endboss.isDead()) {
-            
+
             endGame('won');
         }
     }
 
     cancelAnimationFrame() {
-        if(this.animationFrame) {
+        if (this.animationFrame) {
             cancelAnimationFrame(this.animationFrame);
         }
     }
@@ -280,7 +281,7 @@ class World {
      */
     removeDiscardedObjects(objects) {
         objects.forEach(object => {
-            if(object.discarded) {
+            if (object.discarded) {
                 objects.splice(objects.indexOf(object), 1);
             }
         })

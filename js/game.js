@@ -21,7 +21,6 @@ function init() {
 function startGame() {
     let startScreen = document.getElementById('start_screen');
     let startButton = document.getElementById('start_button');
-
     init();
     startScreen.remove();
     startButton.remove();
@@ -151,7 +150,6 @@ function endGame(outcomeOfGame) {
     let canvasContainer = document.getElementById('canvas_container');
     intervalIds.forEach(clearInterval);
     intervalIds = [];
-    world.cancelAnimationFrame()
     stopGameAudio();
     const deadAnimationCharacter = world.character.playDeadAnimation();
     const deadAnimationEndboss = world.level.endboss.playDeadAnimation();
@@ -159,6 +157,7 @@ function endGame(outcomeOfGame) {
         this.stopDeadAnimation(deadAnimationCharacter, deadAnimationEndboss);       
         this.showEndscreenImage(canvasContainer, outcomeOfGame);
         this.showEndscreenTextAndPlayAudio(canvasContainer, outcomeOfGame);
+        world.cancelAnimationFrame();
     }, 1000);
     setTimeout(() => {
         if (!gameRestarted) {
