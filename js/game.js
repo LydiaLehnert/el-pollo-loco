@@ -155,7 +155,7 @@ function endGame(outcomeOfGame) {
     const deadAnimationEndboss = world.level.endboss.playDeadAnimation();
     setTimeout(() => {
         this.stopDeadAnimation(deadAnimationCharacter, deadAnimationEndboss);       
-        this.showEndscreenImage(canvasContainer, outcomeOfGame);
+        this.showEndscreen(canvasContainer, outcomeOfGame);
         this.showEndscreenTextAndPlayAudio(canvasContainer, outcomeOfGame);
         world.cancelAnimationFrame();
     }, 1000);
@@ -192,7 +192,7 @@ function stopDeadAnimation(deadAnimationCharacter, deadAnimationEndboss) {
  * Displays the end screen image and a button to restart the game within canvasContainer
  * @param {*} canvasContainer 
  */
-function showEndscreenImage(canvasContainer) {
+function showEndscreen(canvasContainer) {
     canvasContainer.innerHTML += `
     <img id = "endscreen_img" class = "endscreen-img" src ="assets/img/9_intro_outro_screens/game_over/endscreen.png"></img>    
     <button onclick = "restartGame()" id = "restart_button" class = "restart-button"> Play again </button>           

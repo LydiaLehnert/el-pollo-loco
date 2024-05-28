@@ -156,11 +156,10 @@ class World {
             const enemy = this.level.enemies[i];
             if (this.character.jumpedOnEnemy(enemy)) {
                 enemy.hit(100);
-                // return;
+                return; 
             }
         }
     }
-
 
     /**
      * Checks if the character is colliding with coins 

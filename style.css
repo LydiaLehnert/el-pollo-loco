@@ -276,6 +276,20 @@ END SCREEN
 RESPONSIVE-DESIGN
 ===================*/
 
+/* Media Queries for iPad Mini, iPad Air, iPad Pro, Asus Zenblock Fold und Nesthub Max */
+@media only screen and (max-width: 1024px) and (min-width: 768px) and (orientation: portrait),
+only screen and (max-width: 1024px) and (min-height: 768px) and (orientation: landscape),
+only screen and (max-width: 1280px) and (min-height: 720px),
+only screen and (max-width: 2200px) and (min-height: 1600px) {
+    .key-instructions-container {
+        display: none;
+    }
+    
+    .mobile-touch-button-container {
+        display: block;
+    }
+}
+
 /* Break point 1 (max-width: 720px)*/
 @media only screen and (max-width: 720px) {
 
@@ -336,7 +350,6 @@ RESPONSIVE-DESIGN
 
 /* Break point 3 (max-height: 600px)*/
 @media only screen and (max-height: 600px) {
-
     .canvas-container,
     canvas,
     #start_screen,
