@@ -213,7 +213,7 @@ function showEndscreenTextAndPlayAudio(canvasContainer, outcomeOfGame) {
 
     } else if (outcomeOfGame === "lost") {
         canvasContainer.innerHTML += `
-    <img id = "endscreen_text_lost"class="endscreen-text" src = "assets/img/9_intro_outro_screens/game_over/you lost.png">
+    <img id = "endscreen_text_lost"class="endscreen-text" src = "assets/img/9_intro_outro_screens/game_over/you-lost.png">
 `;
         playAudio(world.SOUND_LOST);
     }
